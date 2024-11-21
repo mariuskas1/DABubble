@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'mixins';
+
+$primary-color-white: #ffffff;
+$primary-color-purple: #444df2;
+$secondary-color-purple: #797ef3;
+$highlight-color-purple: #535af1;
+$highlight-color-cyan: #1381ff;
+$online-color-green: #92c83e;
+$offline-color-green: #ed1e79;
+$border-color-purple: #adb0d9;
+$text-color-black: #000000;
+$text-color-gray: #686868;
+$bg-color-gray: #eceefe;
+$primary-box-shadow: 0px 6px 10px 0px #00000033;
+$font-size-14: 14px;
+$font-size-16: 16px;
+$font-size-18: 18px;
+$font-size-20: 20px;
+$font-size-24: 24px;
+$font-size-32: 32px;
+$font-size-40: 40px;
+$font-size-64: 64px;
+$font-size-128: 128px;
+$font-weight-300: 300;
+$font-weight-400: 400;
+$font-weight-500: 500;
+$font-weight-600: 600;
+$font-weight-700: 700;
+$desktop-full-hd: 1920px;
+$desktop-large: 1200px;
+$desktop: 960px;
+$tablet: 768px;
+$mobile-large: 640px;
+$mobile: 480px;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.primary-button {
+  @include button-style($primary-color-purple);
+  @include font-style(18px, 700, $primary-color-white);
+  &:hover {
+    background-color: $secondary-color-purple;
+  }
+  &:active {
+    border-radius: 50px;
+    color: $primary-color-white;
+    background-color: $primary-color-purple;
+  }
+}
+
+.secondary-button {
+  @include button-style(
+    $primary-color-white,
+    $bor: 1px solid $secondary-color-purple
+  );
+  @include font-style(18px, 700, $primary-color-purple);
+  &:hover {
+    background-color: $highlight-color-purple;
+    color: $primary-color-white;
+  }
+  &:active {
+    border-radius: 50px;
+    color: $primary-color-white;
+    background-color: $primary-color-purple;
+  }
+}
+
+.primary-input {
+  @include input-style();
+}
+
+.secondary-input {
+  @include input-style(15px 20px);
+}
+
+.icon-container {
+  @include display-flex($gap: 10px);
+  @include size(40px, 40px, 8px);
+  border-radius: 20px;
+  cursor: pointer;
+  > img {
+    @include size(24px, 24px);
+  }
+  &:hover {
+    background-color: $bg-color-gray;
+    > img {
+      filter: brightness(0) saturate(100%) invert(30%) sepia(39%)
+        saturate(4108%) hue-rotate(229deg) brightness(98%) contrast(93%);
+    }
+  }
+}
