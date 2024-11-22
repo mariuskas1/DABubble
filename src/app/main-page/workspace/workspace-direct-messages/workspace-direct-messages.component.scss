@@ -1,0 +1,6 @@
+@import "mixins", "styles";
+@import "./../workspace.component.scss";
+
+:host{
+    width: 100%;
+}
