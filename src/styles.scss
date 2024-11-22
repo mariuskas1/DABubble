@@ -82,6 +82,10 @@ html {
   @include input-style(15px 20px);
 }
 
+.login-input {
+  @include input-style(15px 20px, $bg-color-gray);
+}
+
 .icon-container {
   @include display-flex($gap: 10px);
   @include size(40px, 40px, 8px);

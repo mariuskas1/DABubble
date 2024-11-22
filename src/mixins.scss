@@ -60,12 +60,13 @@
   }
 }
 
-@mixin input-style($pad: 20px) {
+@mixin input-style($pad: 20px, $bg: null) {
   color: $text-color-black;
   padding: $pad;
   border: 1px solid $border-color-purple;
   border-radius: 30px;
   outline: none;
+  background-color: $bg;
   cursor: pointer;
   &::placeholder {
     @include font-style(18px, 500, $text-color-gray);

@@ -1,0 +1,48 @@
+@import "mixins", "styles";
+
+.intro-animation-container {
+  @include display-flex();
+  position: relative;
+  @include size(100%, 100dvh);
+  background: linear-gradient(1.46deg, #313ae6 1.22%, #797ef3 98.76%);
+  overflow: hidden;
+}
+
+.intro-animation-logo-container {
+  @include display-flex();
+  @include size(280px, 200px);
+  position: absolute;
+  z-index: 2;
+  animation: logo-slide-left 300ms ease-out 1000ms forwards;
+}
+
+.intro-animation-logo {
+  z-index: 3;
+}
+
+.intro-animation-span {
+  @include position(absolute, 50%, 50%);
+  @include font-style($font-size-64, $font-weight-700, $primary-color-white);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+  animation: name-slide-in-right 2.5s ease 1300ms forwards;
+}
+
+@keyframes name-slide-in-right {
+  0% {
+    transform: translateX(-10vw);
+  }
+  100% {
+    transform: translateX(20vw);
+  }
+}
+
+@keyframes logo-slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-10vw);
+  }
+}
