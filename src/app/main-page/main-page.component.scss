@@ -5,5 +5,23 @@
     background-color: $bg-color-gray;
     height: 100vh;
     width: 100vw;
-    @include display-flex();
+    @include display-flex($fd: column);
+}
+
+.main-page-container{
+    background-color: $bg-color-gray;
+    @include display-flex($fd: column, $jc: flex-start);
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    
+}
+
+.main-content-div{
+    @include display-flex($jc: flex-start);
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    padding: 16px;
+    
 }

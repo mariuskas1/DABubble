@@ -1,0 +1,18 @@
+@import "mixins", "styles";
+
+:host {
+    display: flex; 
+    flex-direction: column; 
+   
+    height: 100%;
+    
+}
+
+.workspace-container{
+    background-color: white;
+    width: 366px;
+    flex: 1;
+    border-radius: 30px;
+    @include display-flex($fd: column, $jc: flex-start);
+}
+
