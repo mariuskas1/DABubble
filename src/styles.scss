@@ -38,6 +38,14 @@ $mobile: 480px;
   box-sizing: border-box;
   margin-block-start: 0;
   margin-block-end: 0;
+  font-family: 'Nunito';
+}
+
+
+@font-face{
+  font-family: 'Nunito';
+  src: url(./assets/fonts/Nunito-VariableFont_wght.ttf);
+  font-style: normal;
 }
 
 html {
