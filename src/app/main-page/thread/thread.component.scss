@@ -1,0 +1,15 @@
+@import "mixins", "styles";
+
+:host {
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+}
+
+.thread-container{
+    background-color: white;
+    flex: 1;
+    width: 485px;
+    border-radius: 30px;
+    @include display-flex($fd: column, $jc: flex-start);
+}
