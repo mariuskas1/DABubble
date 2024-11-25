@@ -1,16 +1,23 @@
 <div class="workspace-section-container">
     <div class="workspace-section-header">
-        <div class="section-header-title-div">
-            <img src="./../../../../assets/img/arrow_drop_down.png" class="drop-down-icon">
+        <div class="section-header-title-div" (click)="toggleDropdown()">
+            @if(showSubmenu){
+                <img src="./../../../../assets/img/arrow_drop_down.png" class="drop-down-icon">
+            } @else {
+                <img src="./../../../../assets/img/arrow_drop_down1.png" class="drop-down-icon">
+            }
+            
             <img src="./../../../../assets/img/account_circle.png" class="section-logo-icon">
             <span class="section-title">Direktnachrichten</span>
         </div>
         
     </div>
 
-    <div class="workspace-section-submenu">
-        
-        
-    </div>
+    @if(showSubmenu){
+        <div class="workspace-section-submenu" @submenuAnimation>
+            Test
+
+        </div>
+    }
 
 </div>
