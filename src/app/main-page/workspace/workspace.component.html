@@ -1,15 +1,23 @@
-<div class="workspace-container">
-    <div class="workspace-header">
-         <img src="./../../../assets/img/Workspace logo.png" class="workspace-logo">
-         <span class="workspace-title">Devspace</span>
-         <div class="icon-container">
-            <img src="./../../../assets/img/edit_square.png" class="edit-img">
-         </div>
-         
+@if(workspaceMenuOpened){
+    <div class="workspace-container" [@slideInOut]="workspaceMenuOpened ? 'opened' : 'closed'" >
+        <div class="workspace-header">
+                 <img src="./../../../assets/img/Workspace logo.png" class="workspace-logo">
+                 <span class="workspace-title">Devspace</span>
+                 <div class="icon-container">
+                    <img src="./../../../assets/img/edit_square.png" class="edit-img">
+                 </div>
+                 
+        </div>
+            
+        <app-workspace-channels></app-workspace-channels>
+        <app-workspace-direct-messages></app-workspace-direct-messages>
     </div>
-    
-    <app-workspace-channels></app-workspace-channels>
-    <app-workspace-direct-messages></app-workspace-direct-messages>
+}
+
     
 
+
+<div class="workspace-navigation-bar" (click)="toggleWorkspaceMenu()">
+    <span>Workspace-Menü schließen</span>
+    <img src="./../../../assets/img/Show menu1.png" class="workspace-opened-img">
 </div>

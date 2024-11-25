@@ -84,3 +84,32 @@
     width: 100%;
     margin-top: 16px;
 }
+
+.workspace-navigation-bar{
+    position: fixed;
+    left: 0;
+    bottom: -20px;
+    background-color: white;
+    height: 60px;
+    width: 347px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    @include display-flex();
+    font-weight: 500;
+    font-size: 20px;
+    box-shadow: -4px 4px 7px 0px rgba(0, 0, 0, 0.2);
+
+    transform: rotate(-90deg); 
+    transform-origin: top left;
+
+    &:hover{
+        cursor: pointer;
+        color: $primary-color-purple;
+        font-weight: 600;
+    }
+
+    &:hover img{
+        filter: brightness(0) saturate(100%) invert(24%) sepia(92%) saturate(2852%) hue-rotate(233deg) brightness(96%) contrast(98%);
+    }
+}
+
