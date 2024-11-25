@@ -52,6 +52,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.width-100 {
+  width: 100%;
+}
+
 .primary-button {
   @include button-style($primary-color-purple);
   @include font-style(18px, 700, $primary-color-white);
