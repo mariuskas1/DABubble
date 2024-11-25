@@ -13,5 +13,6 @@ bootstrapApplication(AppComponent, {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAnimations(),
+    BrowserAnimationsModule,
   ],
 }).catch(err => console.error(err));;
