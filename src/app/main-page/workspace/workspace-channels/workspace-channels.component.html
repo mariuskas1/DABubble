@@ -1,7 +1,7 @@
 
 <div class="workspace-section-container">
     <div class="workspace-section-header">
-        <div class="section-header-title-div">
+        <div class="section-header-title-div" (click)="toggleDropdown()">
             <img src="./../../../../assets/img/arrow_drop_down.png" class="drop-down-icon">
             <img src="./../../../../assets/img/workspaces.png" class="section-logo-icon">
             <span class="section-title">Channels</span>
@@ -11,10 +11,21 @@
         </div>
     </div>
 
-    <div class="workspace-section-submenu">
-        <div class="channel-title-div">
-            
+    @if(showSubmenu){
+        <div class="workspace-section-submenu" @submenuAnimation>
+            <div class="channel-title-div">
+                <div class="channel-title-container">
+                    <img src="./../../../../assets/img/tag.png">
+                    <span class="channel-title">Entwicklerteam</span>
+                </div>
+            </div>
+    
+            <div class="add-channel-div">
+                <img src="./../../../../assets/img/add_circle.png">
+                <span class="add-channel-span">Channel hinzufügen</span>
+            </div>
         </div>
-    </div>
+    }
+    
 
 </div>

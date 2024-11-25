@@ -3,5 +3,51 @@
 
 :host{
     width: 100%;
-    height: 80px;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.channel-title-div{
+    width: 100%;
+    height: 33px;
+    margin-left: 24px;
+}
+
+.channel-title-container{
+    @include display-flex($jc:flex-start);
+    width: 206px;
+    height: 100%;
+    border-radius: 30px; 
+    background-color: $bg-color-gray;
+    padding-left: 16px;
+    
+}
+
+.channel-title{
+    color: $primary-color-purple;
+    font-weight: 700;
+    font-size: 18px;
+    margin-left: 8px;
+}
+
+.add-channel-div{
+    @include display-flex($jc:flex-start);
+    width: 100%;
+    padding-left: 40px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+
+    &:hover{
+        cursor: pointer;
+        color: $primary-color-purple;
+    }
+
+    &:hover img{
+       filter: brightness(0) saturate(100%) invert(24%) sepia(92%) saturate(2852%) hue-rotate(233deg) brightness(96%) contrast(98%);
+    }
+}
+
+.add-channel-span{
+    margin-left: 12px;
+    font-size: 18px;
 }
