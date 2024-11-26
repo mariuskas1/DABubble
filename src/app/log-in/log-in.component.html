@@ -43,6 +43,7 @@
             class="login-input"
             type="text"
             placeholder="beispielname@email.com"
+            [(ngModel)]="email"
           />
           <img
             class="input-icon"
@@ -52,7 +53,7 @@
         </div>
 
         <div class="login-input-container">
-          <input class="login-input" type="text" placeholder="Passwort" />
+          <input class="login-input" type="text" placeholder="Passwort" [(ngModel)]="password" />
           <img
             class="input-icon"
             src="./../../assets/img/password_icon.png"
