@@ -4,6 +4,9 @@ export class User {
   lastName: string;
   email: string;
   channels: number[];
+  chats: number[];
+  online: boolean;
+  avatar: string;
 
   constructor(obj?: Partial<User>) {
     this.id = obj?.id ?? 0;
@@ -11,5 +14,8 @@ export class User {
     this.lastName = obj?.lastName ?? '';
     this.email = obj?.email ?? '';
     this.channels = obj?.channels ?? [0];
+    this.chats = obj?.chats ?? [0];
+    this.online = obj?.online ?? false;
+    this.avatar = obj?.avatar ?? '';
   }
 }

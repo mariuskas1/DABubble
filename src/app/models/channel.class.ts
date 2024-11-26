@@ -1,13 +1,14 @@
+
 export class Channel {
-    id: number;
+    id: string;
     name: string;
-    userIds: number[];
+    userIds: string[];
     messages: string[];
     threads: string[];
     creator: string;
   
     constructor(obj?: Partial<Channel>) {
-      this.id = obj?.id ?? 0;
+      this.id = obj?.id ?? '';
       this.userIds = obj?.userIds ?? [];
       this.name = obj?.name ?? '';
       this.messages = obj?.messages ?? [];
