@@ -1,4 +1,4 @@
-@if(workspaceMenuOpened){
+
     <div class="workspace-container" [@slideInOut]="workspaceMenuOpened ? 'opened' : 'closed'" >
         <div class="workspace-header">
                  <img src="./../../../assets/img/Workspace logo.png" class="workspace-logo">
@@ -9,15 +9,19 @@
                  
         </div>
             
-        <app-workspace-channels></app-workspace-channels>
-        <app-workspace-direct-messages></app-workspace-direct-messages>
+        <div class="workspace-content">
+            <app-workspace-channels></app-workspace-channels>
+            <app-workspace-direct-messages></app-workspace-direct-messages>
+        </div>
     </div>
-}
 
-    
 
 
 <div class="workspace-navigation-bar" (click)="toggleWorkspaceMenu()">
     <span>Workspace-Menü schließen</span>
-    <img src="./../../../assets/img/Show menu1.png" class="workspace-opened-img">
+    @if(workspaceMenuOpened){
+        <img src="./../../../assets/img/Show menu1.png" class="workspace-opened-img">
+    } @else {
+        <img src="./../../../assets/img/Show menu2.png" class="workspace-opened-img">
+    }
 </div>

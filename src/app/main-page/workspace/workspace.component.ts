@@ -13,15 +13,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('slideInOut', [
       state('opened', style({
         transform: 'translateX(0)',
-        opacity: 1
+        opacity: 1,
+        display: 'block', // Display state ensures visibility when opened
       })),
       state('closed', style({
         transform: 'translateX(-200%)',
-        opacity: 0
+        opacity: 0,
+        display: 'none', // Display state hides element when closed
       })),
-      transition('opened <=> closed', [
-        animate('500ms ease-in-out')
-      ]),
+      transition('opened <=> closed', animate('125ms ease-in-out')), // Smooth transition
     ]),
   ],
 })
@@ -31,7 +31,6 @@ export class WorkspaceComponent {
 
 
   toggleWorkspaceMenu(){
-
     this.workspaceMenuOpened = !this.workspaceMenuOpened;
   }
 
