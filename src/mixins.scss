@@ -63,11 +63,12 @@
 @mixin input-style($pad: 20px, $bg: null) {
   color: $text-color-black;
   padding: $pad;
-  border: 1px solid $border-color-purple;
+  border: 1px solid transparent;
   border-radius: 30px;
   outline: none;
   background-color: $bg;
   cursor: pointer;
+  width: 100%;
   &::placeholder {
     @include font-style(18px, 500, $text-color-gray);
   }
@@ -83,4 +84,19 @@
   width: $width;
   height: $height;
   padding: $pad;
+}
+
+@mixin href-style($bor: 1px solid $border-color-purple, $bg: null) {
+  @include display-flex($gap: 10px);
+  @include font-style($font-size-18, $font-weight-400, $secondary-color-purple);
+  border: 1px solid transparent;
+  text-decoration: none;
+  padding: 10px 15px;
+  &:hover {
+    @include font-style($font-size-18, $font-weight-500, $primary-color-purple);
+    cursor: pointer;
+    border: $bor;
+    border-radius: 30px;
+    background: $bg;
+  }
 }
