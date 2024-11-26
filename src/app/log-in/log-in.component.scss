@@ -1,48 +1,213 @@
 @import "mixins", "styles";
 
-.intro-animation-container {
+.login {
+  @include size(100vw, 100dvh);
+  background: $bg-color-gray;
+  padding: 32px;
+}
+
+.intro {
   @include display-flex();
-  position: relative;
-  @include size(100%, 100dvh);
-  background: linear-gradient(1.46deg, #313ae6 1.22%, #797ef3 98.76%);
+  @include position(fixed, 0, 0, $zi: 3);
+  @include size(100vw, 100dvh);
+  background: linear-gradient($secondary-color-purple, $bg-color-blue);
+  transition: all 500ms ease-out;
+  animation: fade-out 500ms ease-out 2500ms forwards;
+}
+
+.intro-content {
+  @include display-flex($gap: 32px);
+  @include size($height: 100%);
   overflow: hidden;
+  transform: translateX(200px);
+  animation: logo-slide-left 300ms ease-out 500ms forwards,
+    logo-slide-top-left 500ms ease-out 2000ms forwards;
 }
 
-.intro-animation-logo-container {
+.logo-container {
   @include display-flex();
-  @include size(280px, 200px);
-  position: absolute;
-  z-index: 2;
-  animation: logo-slide-left 300ms ease-out 1000ms forwards;
-}
-
-.intro-animation-logo {
+  @include size($height: 100%);
+  background: linear-gradient($secondary-color-purple, $bg-color-blue);
   z-index: 3;
+  animation: hide-background 500ms ease-out 2000ms forwards;
 }
 
-.intro-animation-span {
-  @include position(absolute, 50%, 50%);
-  @include font-style($font-size-64, $font-weight-700, $primary-color-white);
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  color: white;
-  animation: name-slide-in-right 2.5s ease 1300ms forwards;
+.intro-span {
+  @include font-style($font-size-72, $font-weight-700, $primary-color-white);
+  transform: translateX(-400px);
+  animation: slide-in-right 500ms ease-out 800ms forwards,
+    adjust-span-size 500ms ease-out 2000ms forwards;
 }
 
-@keyframes name-slide-in-right {
-  0% {
-    transform: translateX(-10vw);
+.logo {
+  @include size($height: 200px);
+  animation: adjust-logo-size 500ms ease-out 2000ms forwards;
+}
+
+.content {
+  @include display-flex($jc: space-between, $fd: column);
+  height: 100%;
+}
+
+.login-header {
+  @include display-flex($jc: space-between);
+  @include size(100%, 85px);
+}
+
+.header-left {
+  @include display-flex($gap: 16px);
+  > img {
+    @include size(70px, 70px);
   }
-  100% {
-    transform: translateX(20vw);
+  > span {
+    @include font-style($font-size-24, $font-weight-700, $text-color-black);
+  }
+}
+
+.header-right {
+  @include display-flex($fd: column, $gap: 16px);
+  > span {
+    @include font-style($font-size-18, $font-weight-400, $text-color-black);
+  }
+}
+
+.login-form {
+  @include display-flex($fd: column, $gap: 30px);
+  max-width: 620px;
+  padding: 32px 64px;
+  border-radius: 30px;
+  box-shadow: $primary-box-shadow;
+  background: $primary-color-white;
+}
+
+.form-header {
+  @include display-flex($fd: column, $gap: 16px);
+  > h3 {
+    @include font-style($font-size-46, $font-weight-700, $primary-color-purple);
+  }
+  > span {
+    @include font-style($font-size-20, $font-weight-400, $text-color-black);
+    text-align: center;
+  }
+}
+
+.login-inputs {
+  @include display-flex($fd: column, $gap: 30px);
+  @include size(100%);
+}
+
+.input-icon {
+  @include position(absolute, 16px, 24px);
+  @include size(24px, 24px);
+}
+
+.login-input-container {
+  @include position(relative);
+  @include size(100%);
+}
+
+.divider {
+  @include display-flex($gap: 16px);
+  @include size(100%);
+  > .divider-line {
+    flex-grow: 1;
+
+    height: 1px;
+    background: $border-color-purple;
+  }
+  > .divider-text {
+    @include font-style($font-size-18, $font-weight-400, $text-color-black);
+    white-space: nowrap;
+  }
+}
+
+.login-buttons {
+  @include display-flex($fd: column, $gap: 30px);
+  width: 100%;
+}
+
+.google-login {
+  @include display-flex($gap: 16px);
+  @include font-style($font-size-18, $font-weight-400, $primary-color-purple);
+  padding: 15px 20px;
+  > img {
+    @include size(28px, 28px);
+  }
+}
+
+.user-login {
+  @include display-flex($gap: 32px);
+}
+
+.login-footer {
+  @include display-flex($gap: 30px);
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    display: none;
+    opacity: 0;
   }
 }
 
 @keyframes logo-slide-left {
-  0% {
+  from {
+    transform: translateX(200px);
+  }
+  to {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(-10vw);
+}
+
+@keyframes logo-slide-top-left {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateY(calc(-50dvh + 32px + 41px)) translateX(calc(-50vw + 32px  + 101px));
+    gap: 16px;
+  }
+}
+
+@keyframes hide-background {
+  from {
+    height: 0%;
+    background: none;
+  }
+  to {
+    height: 0%;
+    background: none;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(-400px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes adjust-span-size {
+  from {
+    font-size: $font-size-72;
+    color: $primary-color-white;
+  }
+  to {
+    font-size: $font-size-24;
+    color: $text-color-black;
+  }
+}
+
+@keyframes adjust-logo-size {
+  from {
+    height: 200px;
+  }
+  to {
+    height: 70px;
   }
 }
