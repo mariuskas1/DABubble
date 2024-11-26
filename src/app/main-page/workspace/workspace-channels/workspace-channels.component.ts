@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+
 
 @Component({
   selector: 'app-workspace-channels',
   standalone: true,
-  imports: [],
+  imports: [ ],
   templateUrl: './workspace-channels.component.html',
   styleUrl: './workspace-channels.component.scss',
   animations: [
@@ -20,12 +21,19 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ]
 })
 export class WorkspaceChannelsComponent {
+  @Output() dialogStateChange = new EventEmitter<boolean>();
 
   showSubmenu = true;
+  addChannelDialogOpened = true;
 
 
   toggleDropdown(){
     this.showSubmenu = !this.showSubmenu;
+  }
+
+  displayAddChannelDialog(){
+    this.addChannelDialogOpened = true;
+    this.dialogStateChange.emit(this.addChannelDialogOpened);
   }
 
 }
