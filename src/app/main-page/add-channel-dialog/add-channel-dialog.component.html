@@ -1,0 +1,32 @@
+
+    <div class="dialog-bg" (click)="closeDialog()">
+        <div class="dialog" (click)="stopPropagation($event)">
+            <div class="dialog-header">
+                <span class="dialog-title">Channel erstellen</span>
+                <div class="icon-container">
+                    <img src="./../../../assets/img/close.png" (click)="closeDialog()">
+                </div>
+            </div>
+    
+            <div class="dialog-content">
+                <span class="dialog-description">Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein 
+                    #marketing zum Beispiel.
+                </span>
+                <div class="input-div">
+                    <label for="channel-name">Channel-Name</label>
+                    <input type="text" id="channel-name" placeholder="z.B. Kooperationsprojekte">
+                    <img src="./../../../assets/img/tag2.png" class="placeholder-image">
+                </div>
+                <div class="input-div">
+                    <label for="channel-name">Beschreibung</label>
+                    <input type="text" id="channel-name" placeholder="Dein Text hier">
+                </div>    
+            </div>
+
+            <div class="dialog-footer">
+                <button>Erstellen</button>
+            </div>
+    
+        </div>
+    </div>
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { WorkspaceChannelsComponent } from "./workspace-channels/workspace-channels.component";
 import { WorkspaceDirectMessagesComponent } from "./workspace-direct-messages/workspace-direct-messages.component";
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -27,7 +27,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class WorkspaceComponent {
 
+  @Output() dialogStateChange = new EventEmitter<boolean>();
+
   workspaceMenuOpened = true;
+
+  handleDialogStateChange(newState: boolean) {
+    this.dialogStateChange.emit(newState); 
+  }
 
 
   toggleWorkspaceMenu(){
