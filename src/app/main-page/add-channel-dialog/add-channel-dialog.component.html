@@ -1,10 +1,12 @@
 
     <div class="dialog-bg" (click)="closeDialog()">
+       
+       @if(mainDialogOpened){
         <div class="dialog" (click)="stopPropagation($event)">
             <div class="dialog-header">
                 <span class="dialog-title">Channel erstellen</span>
-                <div class="icon-container">
-                    <img src="./../../../assets/img/close.png" (click)="closeDialog()">
+                <div class="icon-container" (click)="closeDialog()">
+                    <img src="./../../../assets/img/close.png">
                 </div>
             </div>
     
@@ -14,19 +16,59 @@
                 </span>
                 <div class="input-div">
                     <label for="channel-name">Channel-Name</label>
-                    <input type="text" id="channel-name" placeholder="z.B. Kooperationsprojekte">
+                    <input type="text" id="channel-name" placeholder="z.B. Kooperationsprojekte" [(ngModel)]="channel.name">
                     <img src="./../../../assets/img/tag2.png" class="placeholder-image">
                 </div>
                 <div class="input-div">
                     <label for="channel-name">Beschreibung</label>
-                    <input type="text" id="channel-name" placeholder="Dein Text hier">
+                    <input type="text" id="channel-name" placeholder="Dein Text hier" [(ngModel)]="channel.description">
                 </div>    
             </div>
 
             <div class="dialog-footer">
-                <button>Erstellen</button>
+                <button (click)="displayAddPeopleDialog(); stopPropagation($event)">Erstellen</button>
             </div>
-    
         </div>
+       } @else if(addPeopleDialogOpened){
+        <div class="secondary-dialog" (click)="stopPropagation($event)">
+            <div class="dialog-header">
+                <span class="dialog-title">Leute hinzufügen</span>
+                <div class="icon-container" (click)="closeDialog()">
+                    <img src="./../../../assets/img/close.png">
+                </div>
+            </div>
+
+            <div class="secondary-dialog-content">
+                <div class="radio-container">
+                    <label class="radio-label">
+                      <input type="radio" name="options" value="option1" checked [(ngModel)]="selectedOption">
+                      <span class="custom-radio"></span>
+                      <span class="radio-span">Alle Mitglieder von <span class="channel-name-span">OfficeTeam </span>hinzufügen</span>
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="options" value="option2" [(ngModel)]="selectedOption">
+                      <span class="custom-radio"></span>
+                      <span class="radio-span">Bestimmte Leute hinzufügen</span>
+                    </label>
+                </div>
+
+                @if(selectedOption === 'option2'){
+                    <div class="input-div">
+                        <input type="text" id="names-input" placeholder="Namen eingeben" [(ngModel)]="channelMemberNames">
+                    </div> 
+                }
+                   
+            </div>
+
+            <div class="dialog-footer">
+                <button (click)="createNewChannel()">Erstellen</button>
+            </div>
+
+        </div>
+       }
+        
+
+
+
     </div>
 

@@ -14,7 +14,8 @@ import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dial
 })
 export class MainPageComponent {
 
-  addChannelDialogOpened = true;
+  addChannelDialogOpened = false;
+  activeChannel: string = '';
 
   handleDialogStateChange(dialogState: boolean) {
     this.addChannelDialogOpened = dialogState;
