@@ -1,0 +1,99 @@
+<form
+  class="auth-form"
+  id="registration-form"
+  (ngSubmit)="registerUser()"
+  #registrationForm="ngForm"
+>
+  <header class="form-header">
+    <h3>Konto erstellen</h3>
+    <span
+      >Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
+      DABubble-Konto.</span
+    >
+  </header>
+
+  <main class="auth-inputs">
+    <div class="auth-input-container">
+      <input
+        class="auth-input"
+        type="text"
+        placeholder="Name und Nachname"
+        name="fullName"
+        required
+      />
+      <img
+        class="auth-input-icon"
+        src="./../../assets/img/user_icon.png"
+        alt="user_icon"
+      />
+    </div>
+
+    <div class="auth-input-container">
+      <input
+        class="auth-input"
+        type="email"
+        placeholder="beispielname@email.com"
+        name="email"
+        required
+      />
+      <img
+        class="auth-input-icon"
+        src="./../../assets/img/mail_icon.png"
+        alt="password_icon"
+      />
+    </div>
+
+    <div class="auth-input-container">
+      <input
+        class="auth-input"
+        type="password"
+        placeholder="Passwort"
+        name="password"
+        required
+      />
+      <img
+        class="auth-input-icon"
+        src="./../../assets/img/password_icon.png"
+        alt="password_icon"
+      />
+    </div>
+
+    <section class="auth-checkbox-container">
+      <div class="auth-checkbox-wrapper">
+        <label for="auth-checkbox" class="auth-checkbox-label">
+          <input
+            id="auth-checkbox"
+            type="checkbox"
+            name="privacyPolicy"
+            required
+            [(ngModel)]="isCheckboxChecked"
+          />
+          <span></span>
+        </label>
+        <div class="auth-checkbox-info-container">
+          <span class="auth-checkbox-info">
+            Ich stimme der <a>Datenschutzerklärung</a> zu.
+          </span>
+        </div>
+      </div>
+      <span
+        *ngIf="showPrivacyPolicyError && !isCheckboxChecked"
+        class="auth-checkbox-error"
+        >*Bitte aktzeptieren Sie die Datenschutzbestimmungen.</span
+      >
+    </section>
+  </main>
+
+  <section class="auth-buttons align-items-flex-end">
+    <div class="auth-button-container">
+      <button
+        [disabled]="!isCheckboxChecked"
+        name="checkbox"
+        type="submit"
+        class="primary-button"
+      >
+        Weiter
+      </button>
+    </div>
+  </section>
+</form>

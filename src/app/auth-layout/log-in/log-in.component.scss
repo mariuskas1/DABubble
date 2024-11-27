@@ -1,9 +1,7 @@
 @import "mixins", "styles";
 
 .login {
-  @include size(100vw, 100dvh);
-  background: $bg-color-gray;
-  padding: 32px;
+  @include display-flex();
 }
 
 .intro {
@@ -49,63 +47,6 @@
   height: 100%;
 }
 
-.login-header {
-  @include display-flex($jc: space-between);
-  @include size(100%, 85px);
-}
-
-.header-left {
-  @include display-flex($gap: 16px);
-  > img {
-    @include size(70px, 70px);
-  }
-  > span {
-    @include font-style($font-size-24, $font-weight-700, $text-color-black);
-  }
-}
-
-.header-right {
-  @include display-flex($fd: column, $gap: 16px);
-  > span {
-    @include font-style($font-size-18, $font-weight-400, $text-color-black);
-  }
-}
-
-.login-form {
-  @include display-flex($fd: column, $gap: 30px);
-  max-width: 620px;
-  padding: 32px 64px;
-  border-radius: 30px;
-  box-shadow: $primary-box-shadow;
-  background: $primary-color-white;
-}
-
-.form-header {
-  @include display-flex($fd: column, $gap: 16px);
-  > h3 {
-    @include font-style($font-size-46, $font-weight-700, $primary-color-purple);
-  }
-  > span {
-    @include font-style($font-size-20, $font-weight-400, $text-color-black);
-    text-align: center;
-  }
-}
-
-.login-inputs {
-  @include display-flex($fd: column, $gap: 30px);
-  @include size(100%);
-}
-
-.input-icon {
-  @include position(absolute, 16px, 24px);
-  @include size(24px, 24px);
-}
-
-.login-input-container {
-  @include position(relative);
-  @include size(100%);
-}
-
 .divider {
   @include display-flex($gap: 16px);
   @include size(100%);
@@ -121,11 +62,6 @@
   }
 }
 
-.login-buttons {
-  @include display-flex($fd: column, $gap: 30px);
-  width: 100%;
-}
-
 .google-login {
   @include display-flex($gap: 16px);
   @include font-style($font-size-18, $font-weight-400, $primary-color-purple);
@@ -133,14 +69,6 @@
   > img {
     @include size(28px, 28px);
   }
-}
-
-.user-login {
-  @include display-flex($gap: 32px);
-}
-
-.login-footer {
-  @include display-flex($gap: 30px);
 }
 
 @keyframes fade-out {
@@ -167,7 +95,8 @@
     transform: translateX(0px);
   }
   to {
-    transform: translateY(calc(-50dvh + 32px + 41px)) translateX(calc(-50vw + 32px  + 101px));
+    transform: translateY(calc(-50dvh + 32px + 41px))
+      translateX(calc(-50vw + 32px + 101px));
     gap: 16px;
   }
 }

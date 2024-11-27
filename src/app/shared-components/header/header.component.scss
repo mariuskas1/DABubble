@@ -1,0 +1,24 @@
+@import "mixins", "styles";
+
+.header {
+  @include display-flex($jc: space-between);
+  @include size(100%, 85px);
+  background: $bg-color-gray;
+}
+
+.header-left {
+  @include display-flex($gap: 16px);
+  > img {
+    @include size(70px, 70px);
+  }
+  > span {
+    @include font-style($font-size-24, $font-weight-700, $text-color-black);
+  }
+}
+
+.header-right {
+  @include display-flex($fd: column, $gap: 16px);
+  > span {
+    @include font-style($font-size-18, $font-weight-400, $text-color-black);
+  }
+}

@@ -1,0 +1,6 @@
+@import "mixins", "styles";
+
+.footer {
+    @include display-flex($gap: 30px);
+    background: $bg-color-gray;
+  }

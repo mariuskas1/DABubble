@@ -73,10 +73,10 @@
     @include font-style(18px, 500, $text-color-gray);
   }
   &:hover {
-    border: 1px solid $secondary-color-purple;
+    border-color: $secondary-color-purple;
   }
   &:focus {
-    border: 1px solid $primary-color-purple;
+    border-color: $primary-color-purple;
   }
 }
 
@@ -86,7 +86,7 @@
   padding: $pad;
 }
 
-@mixin href-style($bor: 1px solid $border-color-purple, $bg: null) {
+@mixin href-style($bor: $border-color-purple, $bg: null) {
   @include display-flex($gap: 10px);
   @include font-style($font-size-18, $font-weight-400, $secondary-color-purple);
   border: 1px solid transparent;
@@ -95,7 +95,7 @@
   &:hover {
     @include font-style($font-size-18, $font-weight-500, $primary-color-purple);
     cursor: pointer;
-    border: $bor;
+    border-color: $bor;
     border-radius: 30px;
     background: $bg;
   }
