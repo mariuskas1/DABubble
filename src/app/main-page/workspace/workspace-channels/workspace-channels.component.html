@@ -17,12 +17,14 @@
 
     @if(showSubmenu){
         <div class="workspace-section-submenu" @submenuAnimation>
-            <div class="channel-title-div">
-                <div class="channel-title-container">
-                    <img src="./../../../../assets/img/tag.png">
-                    <span class="channel-title">Entwicklerteam</span>
+            @for (channel of allUserChannels; track $index) {
+                <div class="channel-title-div">
+                    <div class="channel-title-container" [class.active]="activeIndex === $index" (click)="activateChannel($index)">
+                        <img [src]="activeIndex === $index ? './../../../../assets/img/tag.png' : './../../../../assets/img/tag2.png'"    >
+                        <span class="channel-title">{{channel.name}}</span>
+                    </div>
                 </div>
-            </div>
+            }
     
             <div class="add-channel-div" (click)="displayAddChannelDialog()">
                 <img src="./../../../../assets/img/add_circle.png">

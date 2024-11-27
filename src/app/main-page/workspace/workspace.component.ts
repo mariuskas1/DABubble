@@ -28,6 +28,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class WorkspaceComponent {
 
   @Output() dialogStateChange = new EventEmitter<boolean>();
+  
 
   workspaceMenuOpened = true;
 
