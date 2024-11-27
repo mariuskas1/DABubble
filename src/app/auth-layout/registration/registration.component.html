@@ -18,6 +18,7 @@
         class="auth-input"
         type="text"
         placeholder="Name und Nachname"
+        [(ngModel)]="fullName"
         name="fullName"
         required
       />
@@ -33,6 +34,7 @@
         class="auth-input"
         type="email"
         placeholder="beispielname@email.com"
+        [(ngModel)]="email"
         name="email"
         required
       />
@@ -48,6 +50,7 @@
         class="auth-input"
         type="password"
         placeholder="Passwort"
+        [(ngModel)]="password"
         name="password"
         required
       />

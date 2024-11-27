@@ -15,20 +15,31 @@ import { FormsModule } from '@angular/forms';
 export class RegistrationComponent {
   showPrivacyPolicyError: boolean = false;
   isCheckboxChecked: boolean = false;
-  fullName: string = "";
-  email: string = "";
-  password: string = "";
+  fullName: string = '';
+  email: string = '';
+  password: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   async registerUser() {
+
+    console.log('E-Mail:', this.email);
+    console.log('Passwort:', this.password);
+    if (!this.email || !this.isValidEmail(this.email)) {
+      console.error('Ungültige E-Mail-Adresse');
+      return;
+    }
+
     try {
       const result = await this.authService.signUp(this.email, this.password);
 
       const [firstName, ...lastNameParts] = this.fullName.trim().split(' ');
       const lastName = lastNameParts.join(' ');
-
 
       const userData = {
         firstName: firstName,
