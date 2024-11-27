@@ -18,7 +18,7 @@ export class MainChatComponent implements OnInit{
   ngOnInit(): void {
     this.channelService.activeChannel$.subscribe(channelId => {
       this.activeChannel = channelId;
-      console.log('Active Channel in MainChat:', this.activeChannel);
+
     });
   }
     

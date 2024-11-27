@@ -10,6 +10,5 @@ export class ChannelService {
 
   setActiveChannel(channelId: string) {
     this.activeChannelSource.next(channelId);
-    console.log(this.activeChannel$);
   }
 }
