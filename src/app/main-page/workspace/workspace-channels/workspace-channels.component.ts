@@ -1,5 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { Observable } from 'rxjs';
+import { Channel } from './../../../models/channel.class';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { ChannelService } from '../../../services/channel.service';
 
 
 @Component({
@@ -20,12 +24,20 @@ import { trigger, style, animate, transition } from '@angular/animations';
     ]),
   ]
 })
-export class WorkspaceChannelsComponent {
+export class WorkspaceChannelsComponent implements OnInit{
+
   @Output() dialogStateChange = new EventEmitter<boolean>();
+  
+  constructor(private channelService: ChannelService) {}
 
   showSubmenu = true;
   addChannelDialogOpened = false;
+  channels$!: Observable<Channel[]>;
+  allUserChannels: Channel[] = [];
+  firestore: Firestore = inject(Firestore);
 
+  activeIndex: number | null = null;
+  activeChannel:string = '';
 
   toggleDropdown(){
     this.showSubmenu = !this.showSubmenu;
@@ -36,4 +48,25 @@ export class WorkspaceChannelsComponent {
     this.dialogStateChange.emit(this.addChannelDialogOpened);
   }
 
+
+  ngOnInit(){
+    this.getUserChannels();
+  }
+
+
+  getUserChannels(){
+    const userChannelsCollection = collection(this.firestore, 'channels' );
+    this.channels$ = collectionData(userChannelsCollection, { idField: 'id'}) as Observable<Channel[]>;
+    
+    this.channels$.subscribe((changes) => {
+      this.allUserChannels = Array.from(new Map(changes.map(channel => [channel.id, channel])).values());
+    })
+
+  }
+
+  activateChannel(index:number) {
+    this.activeIndex = index; 
+    this.activeChannel = this.allUserChannels[index].id;
+    this.channelService.setActiveChannel(this.activeChannel);
+  }
 }
