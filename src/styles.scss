@@ -6,7 +6,7 @@ $secondary-color-purple: #797ef3;
 $highlight-color-purple: #535af1;
 $highlight-color-cyan: #1381ff;
 $online-color-green: #92c83e;
-$offline-color-green: #ed1e79;
+$error-color-green: #ed1e79;
 $border-color-purple: #adb0d9;
 $text-color-black: #000000;
 $text-color-gray: #686868;
@@ -58,13 +58,17 @@ html {
   width: 100%;
 }
 
+.align-items-flex-end {
+  align-items: flex-end !important;
+}
+
 .primary-button {
   @include button-style($primary-color-purple);
   @include font-style(18px, 700, $primary-color-white);
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: $secondary-color-purple;
   }
-  &:active {
+  &:active:not(:disabled) {
     border-radius: 50px;
     color: $primary-color-white;
     background-color: $primary-color-purple;
@@ -77,11 +81,11 @@ html {
     $bor: 1px solid $secondary-color-purple
   );
   @include font-style(18px, 700, $primary-color-purple);
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: $highlight-color-purple;
     color: $primary-color-white;
   }
-  &:active {
+  &:active:not(:disabled) {
     border-radius: 50px;
     color: $primary-color-white;
     background-color: $primary-color-purple;
@@ -96,10 +100,54 @@ html {
   @include input-style(15px 20px);
 }
 
-.login-input {
+.auth-form {
+  @include display-flex($fd: column, $gap: 30px);
+  max-width: 620px;
+  padding: 32px 64px;
+  border-radius: 30px;
+  box-shadow: $primary-box-shadow;
+  background: $primary-color-white;
+}
+
+.form-header {
+  @include display-flex($fd: column, $gap: 16px);
+  > h3 {
+    @include font-style($font-size-46, $font-weight-700, $primary-color-purple);
+  }
+  > span {
+    @include font-style($font-size-20, $font-weight-400, $text-color-black);
+    text-align: center;
+  }
+}
+
+.auth-inputs {
+  @include display-flex($fd: column, $gap: 30px);
+  @include size(100%);
+}
+
+.auth-input {
   @include position(relative);
   @include size($height: 60px);
   @include input-style(15px 20px 15px 80px, $bg-color-gray);
+}
+
+.auth-input-icon {
+  @include position(absolute, 16px, 24px);
+  @include size(24px, 24px);
+}
+
+.auth-input-container {
+  @include position(relative);
+  @include size(100%);
+}
+
+.auth-button-container {
+  @include display-flex($gap: 32px);
+}
+
+.auth-buttons {
+  @include display-flex($fd: column, $gap: 30px);
+  width: 100%;
 }
 
 .icon-container {
@@ -124,7 +172,7 @@ html {
 }
 
 .secondary-href {
-  @include href-style($bor: 1px solid transparent, $bg: $bg-color-gray);
+  @include href-style($bor: transparent, $bg: $bg-color-gray);
 }
 
 .max-width-desktop {

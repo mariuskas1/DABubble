@@ -1,0 +1,12 @@
+@import "mixins", "styles";
+
+.content {
+  @include display-flex($jc: space-between, $fd: column);
+  @include size(100vw, 100dvh);
+  background: $bg-color-gray;
+  padding: 32px;
+}
+
+.auth-header {
+  @include size(100%);
+}

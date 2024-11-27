@@ -1,0 +1,70 @@
+@import "mixins", "styles";
+
+.auth-checkbox-container {
+  @include display-flex($fd: column, $ai: flex-start);
+  @include size(100%);
+  > .auth-checkbox-wrapper {
+    @include display-flex($gap: 8px);
+    align-self: flex-start;
+  }
+  .auth-checkbox-info-container {
+    @include position(relative);
+    > .auth-checkbox-info {
+      @include font-style($font_size_16, $font_weight_400, #42526e);
+      > a {
+        color: $secondary-color-purple;
+        &:hover {
+          color: $primary-color-purple;
+          transition: 225ms ease-in-out;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.auth-checkbox-error {
+  @include font-style($font_size_14, $font_weight_400, $error-color-green);
+}
+
+.auth-checkbox-label {
+  @include position(relative);
+  @include size(16px, 16px);
+  min-width: 16px;
+  cursor: pointer;
+  > input {
+    @include position(absolute);
+    @include size(100%, 100%);
+    opacity: 0;
+    &:checked ~ span {
+      border: 2px solid $primary-color-purple;
+    }
+    &:checked ~ span:hover {
+      border: 2px solid $secondary-color-purple;
+    }
+    &:not(:checked) ~ span:hover {
+      border: 2px solid $primary-color-purple;
+    }
+    &:checked ~ span::after {
+      @include size(3px, 8px);
+      opacity: 1;
+    }
+  }
+  > span {
+    display: block;
+    @include position(absolute);
+    @include size(100%, 100%);
+    border: 2px solid $secondary-color-purple;
+    border-radius: 2px;
+    transition: 225ms ease-in-out;
+    &::after {
+      content: "";
+      @include position(absolute, 0, 4px);
+      @include size(0px, 0px);
+      border: solid $primary-color-purple;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0;
+    }
+  }
+}

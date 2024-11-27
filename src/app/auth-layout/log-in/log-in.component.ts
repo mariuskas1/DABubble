@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../app/services/authentication.service';
+import { AuthService } from '../../services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-log-in',
   standalone: true,
-  imports: [ CommonModule, FormsModule ],
+  imports: [ CommonModule, FormsModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
 })

@@ -1,0 +1,36 @@
+<form class="auth-form" id="registration-form">
+  <header class="form-header">
+    <h3>Wähle deinen Avatar</h3>
+  </header>
+
+  <main class="auth-inputs">
+    <div class="auth-input-container selected-avatar-container">
+      <img
+        [src]="selectedAvatar"
+        alt="selected_avatar"
+        class="selected-avatar"
+      />
+    </div>
+
+    <span class="user-name"> Placeholder </span>
+
+    <section class="avatar-selection">
+      <span>Aus der Liste wählen</span>
+      <div class="avatar-options">
+        <img
+          *ngFor="let avatar of avatars"
+          [src]="avatar.thumb"
+          [alt]="avatar.name"
+          class="avatar-option"
+          (click)="selectAvatar(avatar.image)"
+        />
+      </div>
+    </section>
+  </main>
+
+  <section class="auth-buttons align-items-flex-end">
+    <div class="auth-button-container">
+      <button [disabled]="isAvatarEmpty" [ngClass]="{ 'disabled': isAvatarEmpty }"  class="primary-button">Weiter</button>
+    </div>
+  </section>
+</form>
