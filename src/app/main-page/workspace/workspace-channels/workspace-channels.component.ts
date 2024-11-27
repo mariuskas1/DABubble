@@ -51,6 +51,7 @@ export class WorkspaceChannelsComponent implements OnInit{
 
   ngOnInit(){
     this.getUserChannels();
+    
   }
 
 
@@ -60,6 +61,7 @@ export class WorkspaceChannelsComponent implements OnInit{
     
     this.channels$.subscribe((changes) => {
       this.allUserChannels = Array.from(new Map(changes.map(channel => [channel.id, channel])).values());
+      this.activateChannel(0);
     })
 
   }
