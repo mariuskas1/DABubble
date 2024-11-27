@@ -24,7 +24,7 @@ export class WorkspaceChannelsComponent {
   @Output() dialogStateChange = new EventEmitter<boolean>();
 
   showSubmenu = true;
-  addChannelDialogOpened = true;
+  addChannelDialogOpened = false;
 
 
   toggleDropdown(){

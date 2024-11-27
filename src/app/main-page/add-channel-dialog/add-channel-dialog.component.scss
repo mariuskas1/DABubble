@@ -21,6 +21,16 @@
     padding: 40px;
 }
 
+.secondary-dialog{
+    // height: 279px;
+    width: 710px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+    @include display-flex($fd: column, $jc: flex-start);
+    padding: 40px;
+}
+
 .dialog-header{
     @include display-flex($jc: space-between);
     width: 100%;
@@ -56,7 +66,17 @@
         border-radius: 40px;
         padding: 18px 20px 18px 50px;
         font-size: 18px;
+
+        &:focus {
+            border-color: $highlight-color-purple; 
+            outline: none; 
+        }
     }
+}
+
+#names-input{
+    height: 55px !important;
+    padding: 15px 20px 15px 20px !important;
 }
 
 .placeholder-image{
@@ -69,4 +89,81 @@
     margin-top: 32px;
     width: 100%;
     @include display-flex($jc: flex-end);
+
+    >button{
+        height: 49px;
+        width: 125px;
+        color: white;
+        background-color: $bg-color-blue;
+        font-size: 18px;
+        font-weight: 700;
+        @include display-flex();
+        border-radius: 25px;
+        border: unset;
+        transition: 125ms all ease;
+
+        &:hover{
+            cursor: pointer;
+            background-color: $secondary-color-purple;
+        }
+    }
 } 
+
+.secondary-dialog-content{
+    width: 100%;
+    @include display-flex( $ai: flex-start, $fd: column);
+}
+
+.radio-container {
+    margin-top: 24px;
+    @include display-flex($fd: column, $ai: flex-start);
+    width: 80%;
+    gap: 20px;
+  }
+  
+  .radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .radio-label input {
+    display: none;
+  }
+  
+  .custom-radio {
+    width: 16px;
+    height: 16px;
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .custom-radio::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background-color: $primary-color-purple;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 125ms ease;
+  }
+  
+  .radio-label input:checked + .custom-radio::after {
+    opacity: 1;
+  }
+
+ .radio-span{
+    font-size: 18px;
+    margin-left: 8px;
+ }
+
+ .channel-name-span{
+    color: $highlight-color-purple;
+ }
