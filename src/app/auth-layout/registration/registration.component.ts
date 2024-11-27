@@ -15,11 +15,9 @@ import { FormsModule } from '@angular/forms';
 export class RegistrationComponent {
   showPrivacyPolicyError: boolean = false;
   isCheckboxChecked: boolean = false;
-  isInputsFilled: boolean = false;
   fullName: string = "";
   email: string = "";
   password: string = "";
-  checkbox: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
