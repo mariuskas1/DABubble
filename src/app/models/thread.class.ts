@@ -1,15 +1,13 @@
-import { User } from "./user.class";
+import { threadData } from "../types/types";
 
 export class Thread {
-  id: number;
-  user: User;
-  messages: string[];
-  threads: string[];
+  id: string;
+  userIds: string[];
+  messageIds: string[];
 
-  constructor(obj?: Partial<Thread>) {
-    this.id = obj?.id ?? 0;
-    this.user = obj?.user ?? new User();
-    this.messages = obj?.messages ?? [];
-    this.threads = obj?.threads ?? [];
+  constructor(data: threadData) {
+    this.id = data.id ?? '';
+    this.userIds = data.userIds;
+    this.messageIds = data.messageIds;
   }
 }

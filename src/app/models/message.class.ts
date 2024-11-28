@@ -1,3 +1,5 @@
+import { messageData } from "../types/types";
+
 export class Message {
     id: string;
     senderId: string;
@@ -14,18 +16,4 @@ export class Message {
         this.timeStamp = data.timeStamp ?? new Date();
         this.reactions = data.reactions ?? [];
     }
-
-    private create() {
-        if(this.id) return;
-        
-    } 
-}
-
-export type messageData = {
-    id?: string;
-    senderId: string;
-    chatId: string;
-    messageText: string;
-    timeStamp?: Date;
-    reactions?: string[];
 }
