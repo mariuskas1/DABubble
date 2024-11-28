@@ -1,18 +1,29 @@
 <div class="channel-chat-header">
-    <div class="channel-title-div">
+    <div class="channel-title-div" #channelTitleDiv (click)="openEditChannelDialog()" [ngClass]="{ 'active' : editChannelDialogOpened }">
         <img src="./../../../../assets/img/tag_large.png">
         <span class="channel-title">{{activeChannelData?.name}}</span>
-        <img src="./../../../../assets/img/keyboard_arrow_down.png" alt="">
+        <img src="./../../../../assets/img/keyboard_arrow_down.png">
     </div>
 
     <div class="channel-members-div">
-        <div class="avatar-container">
-            <img src="./../../../../assets/img/Avatar 1.png" alt="">
+        <div class="show-members-div">
+            <div class="avatar-container">
+                <img src="./../../../../assets/img/Avatar 1.png">
+            </div>
+            <span class="member-number-span">1</span>
         </div>
-        <span class="member-number-span">1</span>
+        
         <div class="icon-container">
-            <img src="./../../../../assets/img/person_add.png" alt="">
+            <img src="./../../../../assets/img/person_add.png">
         </div>
 
     </div>
 </div>
+
+@if(editChannelDialogOpened && activeChannelData){
+    <app-edit-channel-dialog 
+        [channelData]="activeChannelData" 
+        (dialogClosed)="closeEditDialog()" 
+        [position]="dialogPosition">
+    </app-edit-channel-dialog>
+}
