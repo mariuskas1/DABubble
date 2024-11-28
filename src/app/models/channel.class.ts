@@ -1,20 +1,19 @@
+import { channelData } from "../types/types";
 
 export class Channel {
     id: string;
     name: string;
     userIds: string[];
-    messages: string[];
-    threads: string[];
-    creator: string;
     description: string;
+    messageIds: string[];
+    threadIds: string[];
   
-    constructor(obj?: Partial<Channel>) {
-      this.id = obj?.id ?? '';
-      this.userIds = obj?.userIds ?? [];
-      this.name = obj?.name ?? '';
-      this.messages = obj?.messages ?? [];
-      this.threads = obj?.threads ?? [];
-      this.creator = obj?.creator ?? '';
-      this.description = obj?.description ?? '';
+    constructor(data: channelData) {
+      this.id = data.id ?? '';
+      this.userIds = data.userIds;
+      this.name = data.name;
+      this.description = data.description ?? '';
+      this.messageIds = data.messageIds ?? [];
+      this.threadIds = data.threadIds ?? [];
     }
-  }
+}
