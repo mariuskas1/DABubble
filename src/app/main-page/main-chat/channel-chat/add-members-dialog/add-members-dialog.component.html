@@ -1,0 +1,26 @@
+<div class="dialog-bg" (click)="closeDialog()">
+       
+    <div class="dialog" (click)="stopPropagation($event)"
+       [style.top]="position.top" [style.right]="position.right">
+       <div class="dialog-header">
+            <span class="dialog-title">Leute hinzufügen</span>
+            <div class="icon-container" (click)="closeDialog()">
+                <img src="./../../../assets/img/close.png">
+            </div>
+        </div>
+
+        <div class="dialog-content">
+            <div class="channel-name-div">
+                <img src="./../../../../../assets/img/tag_purple.png">
+                <span class="channel-name">{{channelData.name}}</span>
+            </div>
+
+            <input type="text" placeholder="Name eingeben" [(ngModel)]="newMemberName" spellcheck="false">
+
+            <div class="button-div">
+                <button [disabled] ="!newMemberName.trim()" (click)="addMember()">Hinzufügen</button>
+            </div>
+        </div>
+
+    </div>
+</div>
