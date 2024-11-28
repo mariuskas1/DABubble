@@ -58,6 +58,7 @@
     border: 1px solid rgba(173, 176, 217, 1);
     border-radius: 20px;
     padding: 20px;
+    transition: all 200ms ease;
 
     >label{
         font-size: 18px;
@@ -66,17 +67,47 @@
     }
 
     >input{
-        width: 100%;
+        width: 95%;
         height: 60px;
         padding: 18px 20px 18px 50px;
         font-size: 18px;
         color: black ;
+        transition: all 200ms ease;
+       
 
         &:focus {
             border-color: $highlight-color-purple; 
             outline: none; 
         }
     }
+}
+
+.input-div.active-input-div{
+    border: unset;
+    padding: unset;
+    padding-bottom: 20px;
+
+    >input{
+        margin-left: 20px;
+    }
+    
+
+    >.input-div-header{
+        margin-bottom: 20px;
+    }
+
+    >.seperator{
+        margin-left: 20px;
+        width: 95%;
+    }
+
+    >.creator-div{
+        margin-left: 20px;
+    }
+}
+
+.creator-div{
+    transition: all 200ms ease;
 }
 
 .active-input{
@@ -91,19 +122,28 @@
 }
 
 .edit-btn{
-    position: absolute;
-    top: 20px;
-    right: 20px;
     border: unset;
     background-color: transparent;
     color: $highlight-color-purple;
     font-size: 18px;
     font-weight: 600;
+    transition: all 200ms ease;
 
     &:hover{
         cursor: pointer;
         font-weight: 700;
     }
+}
+
+.input-div-header{
+    width: 100%;
+    @include display-flex($jc:space-between);
+    transition: all 200ms ease;
+}
+
+.input-label{
+    font-size: 18px;
+    font-weight: 700;
 }
 
 
@@ -140,6 +180,14 @@
 .seperator{
     width: 100%;
     border: 1px solid rgba(173, 176, 217, 1);
+    margin-top: 24px;
+    margin-bottom: 32px;
+    transition: all 200ms ease;
+}
+
+.creator-span{
+    color: $highlight-color-purple;
+    font-size: 24px;
+    display: block;
     margin-top: 16px;
-    margin-bottom: 16px;
 }

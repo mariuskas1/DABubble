@@ -15,23 +15,30 @@
          </div>
  
          <div class="dialog-content">
-             <div class="input-div">
-                 <button class="edit-btn" (click)="editChannelName()">@if(editingChannelName){Speichern} @else {Bearbeiten}</button>
-                 <label for="channel-name">Channel-Name</label> 
+             <div class="input-div" [ngClass]="{ 'active-input-div': editingChannelName }">
+                <div class="input-div-header">
+                    <span class="input-label">Channel-Name</span> 
+                    <button class="edit-btn" (click)="editChannelName()" [ngClass]="{ 'active-btn': editingChannelName }">@if(editingChannelName){Speichern} @else {Bearbeiten}</button>
+                </div>
                  <input type="text" id="channel-name"  [(ngModel)]="channelData.name"
                     [disabled]="!editingChannelName" [ngClass]="editingChannelName ? 'active-input' : 'inactive-input'">
                  <img src="./../../../assets/img/tag2.png" class="placeholder-image">
              </div>
-             <div class="input-div">
-                 <button class="edit-btn" (click)="editChannelDescription()">@if(editingChannelDescription){Speichern} @else {Bearbeiten}</button>
-                 <label for="channel-description">Beschreibung</label> 
+             <div class="input-div" [ngClass]="{ 'active-input-div': editingChannelDescription }">
+                <div class="input-div-header">
+                    <span class="input-label">Beschreibung</span> 
+                    <button class="edit-btn" (click)="editChannelDescription()" [ngClass]="{ 'active-btn': editingChannelDescription }">@if(editingChannelDescription){Speichern} @else {Bearbeiten}</button>
+                </div>
                  <input type="text" id="channel-description" [(ngModel)]="channelData.description"
                    [disabled]="!editingChannelDescription" [ngClass]="editingChannelDescription ? 'active-input' : 'inactive-input'">
 
                  <div class="seperator"></div>
 
-                 <label for="channel-creator">Erstellt von</label> 
-                 <span class="creator-span">Noah Braun</span>
+                 <div class="creator-div">
+                    <span class="input-label">Erstellt von</span>
+                    <span class="creator-span">Noah Braun</span>
+                 </div>
+                 
 
              </div>    
          </div>

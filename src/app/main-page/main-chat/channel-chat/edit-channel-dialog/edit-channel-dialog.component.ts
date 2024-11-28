@@ -39,7 +39,6 @@ export class EditChannelDialogComponent {
     const channelDocRef = doc(this.firestore, `channels/${this.channelData.id}`);
     try {
       await updateDoc(channelDocRef, { ...this.channelData });
-      this.closeDialog();
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +49,7 @@ export class EditChannelDialogComponent {
       this.editingChannelName = true;
     } else {
       this.editingChannelName = false;
-      // this.editChannel();
+      this.editChannel();
     }
   }
 
@@ -60,7 +59,7 @@ export class EditChannelDialogComponent {
       this.editingChannelDescription = true;
     } else {
       this.editingChannelDescription = false;
-      // this.editChannel();
+      this.editChannel();
     }
   }
 
