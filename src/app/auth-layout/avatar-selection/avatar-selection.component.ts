@@ -77,7 +77,7 @@ export class AvatarSelectionComponent {
 
       const registrationData = this.registrationDataService.getUserData();
 
-      if (!registrationData.email || !registrationData.password) {
+      if (!registrationData.email || !registrationData.password || !registrationData.firstName || !registrationData.lastName) {
         console.error('Registrierungsdaten fehlen.');
         return;
       }
@@ -86,15 +86,15 @@ export class AvatarSelectionComponent {
         registrationData.password
       );
 
-      const userData = {
+      const userData = new User({
         firstName: registrationData.firstName,
         lastName: registrationData.lastName,
         email: registrationData.email,
         avatar: registrationData.avatar,
-        channels: [],
-        chats: [],
-        online: true,
-      };
+        isOnline: true,
+        channelIds: [],
+        chatIds: [],
+      });
       this.toastService.showToast('Konto erfolgreich erstellt!');
       await this.authService.saveUserData(result.user.uid, userData);
       this.registrationDataService.clearUserData();
