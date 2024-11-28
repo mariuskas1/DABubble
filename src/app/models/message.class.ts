@@ -1,17 +1,31 @@
 export class Message {
     id: string;
     senderId: string;
-    receiverId: string;
+    chatId: string;
     timeStamp: Date;
-    reactions: Object;
+    reactions: string[];
     messageText: string;
 
-    constructor(obj?: Partial<Message>) {
-        this.id = obj?.id ?? '';
-        this.senderId = obj?.senderId ?? '';
-        this.receiverId = obj?.receiverId ?? '';
-        this.timeStamp = obj?.timeStamp ?? new Date();
-        this.reactions = obj?.reactions ?? '';
-        this.messageText = obj?.messageText ?? '';
+    constructor(data: messageData) {
+        this.id = data.id ?? '';
+        this.senderId = data.senderId;
+        this.chatId = data.chatId;
+        this.messageText = data.messageText;
+        this.timeStamp = data.timeStamp ?? new Date();
+        this.reactions = data.reactions ?? [];
     }
+
+    private create() {
+        if(this.id) return;
+        
+    } 
+}
+
+export type messageData = {
+    id?: string;
+    senderId: string;
+    chatId: string;
+    messageText: string;
+    timeStamp?: Date;
+    reactions?: string[];
 }
