@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/authentication.service';
 import { FormsModule } from '@angular/forms';
+import { RegistrationDataService } from '../../services/registration-data.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-registration',
@@ -19,15 +21,14 @@ export class RegistrationComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private registrationDataService: RegistrationDataService) {}
 
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  async registerUser() {
-
+  async saveUserData() {
     console.log('E-Mail:', this.email);
     console.log('Passwort:', this.password);
     if (!this.email || !this.isValidEmail(this.email)) {
@@ -35,25 +36,16 @@ export class RegistrationComponent {
       return;
     }
 
-    try {
-      const result = await this.authService.signUp(this.email, this.password);
+    const [firstName, ...lastNameParts] = this.fullName.trim().split(' ');
+    const lastName = lastNameParts.join(' ');
 
-      const [firstName, ...lastNameParts] = this.fullName.trim().split(' ');
-      const lastName = lastNameParts.join(' ');
+    this.registrationDataService.setUserData({
+      firstName,
+      lastName,
+      email: this.email,
+      password: this.password,
+    });
 
-      const userData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: this.email,
-        avatar: '',
-        channels: [],
-        chats: [],
-        online: true,
-      };
-      await this.authService.saveUserData(result.user.uid, userData);
-      this.router.navigate(['/avatar-selection']);
-    } catch (error) {
-      console.log('Fehler bei der Registrierung', error);
-    }
+    this.router.navigate(['/avatar-selection']);
   }
 }
