@@ -1,0 +1,52 @@
+
+<div class="dialog-bg" (click)="closeDialog()">
+       
+     <div class="dialog" (click)="stopPropagation($event)"
+        [style.top]="position.top" [style.left]="position.left">
+         <div class="dialog-header">
+            <div class="channel-title-div">
+                <img src="./../../../../assets/img/tag_large.png">
+                <span class="dialog-title">{{channelData.name}} </span>
+            </div>
+             
+             <div class="icon-container" (click)="closeDialog()">
+                 <img src="./../../../assets/img/close.png">
+             </div>
+         </div>
+ 
+         <div class="dialog-content">
+             <div class="input-div">
+                 <button class="edit-btn" (click)="editChannelName()">@if(editingChannelName){Speichern} @else {Bearbeiten}</button>
+                 <label for="channel-name">Channel-Name</label> 
+                 <input type="text" id="channel-name"  [(ngModel)]="channelData.name"
+                    [disabled]="!editingChannelName" [ngClass]="editingChannelName ? 'active-input' : 'inactive-input'">
+                 <img src="./../../../assets/img/tag2.png" class="placeholder-image">
+             </div>
+             <div class="input-div">
+                 <button class="edit-btn" (click)="editChannelDescription()">@if(editingChannelDescription){Speichern} @else {Bearbeiten}</button>
+                 <label for="channel-description">Beschreibung</label> 
+                 <input type="text" id="channel-description" [(ngModel)]="channelData.description"
+                   [disabled]="!editingChannelDescription" [ngClass]="editingChannelDescription ? 'active-input' : 'inactive-input'">
+
+                 <div class="seperator"></div>
+
+                 <label for="channel-creator">Erstellt von</label> 
+                 <span class="creator-span">Noah Braun</span>
+
+             </div>    
+         </div>
+
+         <div class="dialog-footer">
+             <button (click)="editChannel(); stopPropagation($event)">Channel verlassen</button>
+         </div>
+     </div>
+    
+                
+
+</div>
+    
+     
+
+
+
+ 
