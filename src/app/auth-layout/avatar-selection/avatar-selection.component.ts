@@ -86,7 +86,7 @@ export class AvatarSelectionComponent {
         registrationData.password
       );
 
-      const userData = {
+      const userData = new User({
         firstName: registrationData.firstName,
         lastName: registrationData.lastName,
         email: registrationData.email,
@@ -94,11 +94,11 @@ export class AvatarSelectionComponent {
         channels: [],
         chats: [],
         online: true,
-      };
+      });
       this.toastService.showToast('Konto erfolgreich erstellt!');
       await this.authService.saveUserData(result.user.uid, userData);
       this.registrationDataService.clearUserData();
-      
+
       setTimeout(() => {
         this.router.navigate(['/main']);
       }, 2250);
