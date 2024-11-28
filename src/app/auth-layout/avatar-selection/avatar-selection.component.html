@@ -30,7 +30,15 @@
 
   <section class="auth-buttons align-items-flex-end">
     <div class="auth-button-container">
-      <button [disabled]="isAvatarEmpty" [ngClass]="{ 'disabled': isAvatarEmpty }"  class="primary-button">Weiter</button>
+      <button
+        [disabled]="isAvatarEmpty"
+        [ngClass]="{ disabled: isAvatarEmpty }"
+        class="primary-button"
+        (click)="registerUser()"
+      >
+        Weiter
+      </button>
     </div>
   </section>
 </form>
+<app-toast></app-toast>

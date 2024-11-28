@@ -4,11 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/authentication.service';
 import { User } from '../../models/user.class';
+import { RegistrationDataService } from '../../services/registration-data.service';
+import { ToastService } from '../../services/toast.service';
+import { ToastComponent } from '../../shared-components/toast/toast.component';
 
 @Component({
   selector: 'app-avatar-selection',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ToastComponent],
   templateUrl: './avatar-selection.component.html',
   styleUrl: './avatar-selection.component.scss',
 })
@@ -48,7 +51,12 @@ export class AvatarSelectionComponent {
 
   selectedAvatar: string = 'assets/img/avatar_empty.png';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private registrationDataService: RegistrationDataService,
+    private toastService: ToastService
+  ) {}
 
   get isAvatarEmpty(): boolean {
     return this.selectedAvatar === 'assets/img/avatar_empty.png';
@@ -58,22 +66,45 @@ export class AvatarSelectionComponent {
     this.selectedAvatar = avatarImageSource;
   }
 
-  async saveAvatar() {
-    if (this.selectedAvatar) {
-      try {
-        const user = this.authService.auth.currentUser;
+  async registerUser() {
+    if (!this.selectedAvatar) {
+      console.error('Kein Avatar ausgewählt.');
+      return;
+    }
 
-        if (user) {
-          const updateData: Partial<User> = {
-            avatar: this.selectedAvatar,
-          };
+    try {
+      this.registrationDataService.setAvatar(this.selectedAvatar);
 
-          await this.authService.saveUserData(user.uid, updateData);
-          this.router.navigate(['/main-page']);
-        }
-      } catch (error) {
-        console.error('Fehler beim Speichern des Avatars:', error);
+      const registrationData = this.registrationDataService.getUserData();
+
+      if (!registrationData.email || !registrationData.password) {
+        console.error('Registrierungsdaten fehlen.');
+        return;
       }
+      const result = await this.authService.signUp(
+        registrationData.email,
+        registrationData.password
+      );
+
+      const userData = {
+        firstName: registrationData.firstName,
+        lastName: registrationData.lastName,
+        email: registrationData.email,
+        avatar: registrationData.avatar,
+        channels: [],
+        chats: [],
+        online: true,
+      };
+      this.toastService.showToast('Konto erfolgreich erstellt!');
+      await this.authService.saveUserData(result.user.uid, userData);
+      this.registrationDataService.clearUserData();
+      
+      setTimeout(() => {
+        this.router.navigate(['/main']);
+      }, 2250);
+      console.log('Benutzer erfolgreich registriert:', userData);
+    } catch (error) {
+      console.error('Fehler bei der Registrierung:', error);
     }
   }
 }

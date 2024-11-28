@@ -8,6 +8,11 @@
 
 .header-left {
   @include display-flex($gap: 16px);
+  transition: 225ms ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
   > img {
     @include size(70px, 70px);
   }
