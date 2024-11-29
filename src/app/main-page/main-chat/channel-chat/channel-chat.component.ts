@@ -23,7 +23,7 @@ export class ChannelChatComponent {
 
   dialogPosition: { top: string; left: string } = { top: '0px', left: '0px' };
   addMembersDialogPosition: { top: string; right: string } = { top: '0px', right: '0px' };
-  showMembersDialogPosition: { top: string; left: string } = { top: '0px', left: '0px' };
+  showMembersDialogPosition: { top: string; right: string } = { top: '0px', right: '0px' };
 
   editChannelDialogOpened = false;
   showMembersDialogOpened = false;
@@ -35,6 +35,12 @@ export class ChannelChatComponent {
   allUserChannels: Channel[] = [];
   users: User[] = [];
   firestore: Firestore = inject(Firestore);
+
+  avatars: string[] = [
+    './../../../../assets/img/Avatar 1.png',
+    './../../../../assets/img/Avatar.png',
+    './../../../../assets/img/Avatar 3.png'
+  ];
 
   constructor(private channelService: ChannelService) {}
 
@@ -95,8 +101,8 @@ export class ChannelChatComponent {
   openShowMembersDialog() {
     const rect = this.channelTitleDiv.nativeElement.getBoundingClientRect();
     this.showMembersDialogPosition = {
-      top: `${rect.bottom}px`,
-      left: `${rect.left}px`,
+      top: `${rect.bottom + 10}px`,
+      right: `${rect.right + 185}px`,
     };
     this.showMembersDialogOpened = true;
   }
