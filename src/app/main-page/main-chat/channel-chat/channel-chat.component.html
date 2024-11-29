@@ -8,9 +8,14 @@
     <div class="channel-members-div">
         <div class="show-members-div" #showMembersDiv (click)="openShowMembersDialog()">
             <div class="avatar-container">
-                <img src="./../../../../assets/img/Avatar 1.png">
+                @for (avatar of avatars; track $index) {
+                    <img [src]="avatar" [ngStyle]="{
+                        'margin-left': $index === 0 ? '0px' : '-10px',
+                        'z-index': $index
+                      }">
+                }
             </div>
-            <span class="member-number-span">1</span>
+            <span class="member-number-span">3</span>
         </div>
         
         <div class="icon-container" #addMembersDiv (click)="openAddMembersDialog()">
@@ -33,7 +38,10 @@
     <app-show-members-dialog
         [channelData]="activeChannelData" 
         (dialogClosed)="closeShowMembersDialog()" 
-        [position]="showMembersDialogPosition">
+        [position]="showMembersDialogPosition"
+        [allUsers]="users"
+        (openAddMembersDialog)="openAddMembersDialog()"
+        >
     </app-show-members-dialog>
 }
 
@@ -42,6 +50,8 @@
         [channelData]="activeChannelData" 
         [allUsers]="users"
         (dialogClosed)="closeAddMembersDialog()" 
-        [position]="addMembersDialogPosition">
+        [position]="addMembersDialogPosition"
+        (openAddMembersDialog)="openAddMembersDialog()"
+        >
     </app-add-members-dialog>
 }
