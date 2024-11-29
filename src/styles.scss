@@ -6,7 +6,7 @@ $secondary-color-purple: #797ef3;
 $highlight-color-purple: #535af1;
 $highlight-color-cyan: #1381ff;
 $online-color-green: #92c83e;
-$error-color-green: #ed1e79;
+$error-color-red: #ed1e79;
 $border-color-purple: #adb0d9;
 $text-color-black: #000000;
 $text-color-gray: #686868;
@@ -56,6 +56,10 @@ html {
 
 .width-100 {
   width: 100%;
+}
+
+.pad-16 {
+  padding: 16px;
 }
 
 .align-items-flex-end {
@@ -121,24 +125,70 @@ html {
 }
 
 .auth-inputs {
-  @include display-flex($fd: column, $gap: 30px);
+  @include display-flex($fd: column, $gap: 20px);
   @include size(100%);
+}
+
+.auth-input,
+.search-bar-input {
+  @include position(relative);
+  @include size($height: 60px);
 }
 
 .auth-input {
-  @include position(relative);
-  @include size($height: 60px);
   @include input-style(15px 20px 15px 80px, $bg-color-gray);
 }
 
+.search-bar-input {
+  @include input-style(17.5px 45px, $primary-color-white);
+}
+
+.auth-input-icon-container,
+.search-bar-input-icon-container {
+  @include display-flex();
+  @include size(32px, 32px);
+  border-radius: 30px;
+  transition: 225ms ease-in-out;
+  &:hover {
+    background: $border-color-purple;
+    cursor: pointer;
+  }
+}
+
+.auth-input-icon-container {
+  @include position(absolute, 14px, 24px);
+}
+
+.search-bar-input-icon-container {
+  @include position(absolute, 14px, $rig: 48px);
+}
+
 .auth-input-icon {
-  @include position(absolute, 16px, 24px);
+  @include position(absolute, 18px, 24px);
   @include size(24px, 24px);
 }
 
-.auth-input-container {
+.auth-input-icon-hover,
+.search-bar-input-icon-hover {
+  @include size(24px, 24px);
+}
+
+.auth-input-container,
+.search-bar-input-container {
+  @include display-flex($ai: flex-start, $fd: column, $gap: 4px);
   @include position(relative);
   @include size(100%);
+  transition: opacity 225ms ease-in-out;
+
+  > .invalid-input {
+    @include font-style($font-size-14, $font-weight-400, $error-color-red);
+    opacity: 0;
+    transition: 225ms ease-in-out;
+  }
+
+  > .invalid-input.is-invalid {
+    opacity: 1;
+  }
 }
 
 .auth-button-container {

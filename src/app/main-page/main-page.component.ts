@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from "./header/header.component";
 import { WorkspaceComponent } from "./workspace/workspace.component";
 import { MainChatComponent } from "./main-chat/main-chat.component";
 import { ThreadComponent } from "./thread/thread.component";
 import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
+import { HeaderComponent } from '../shared-components/header/header.component';
 
 @Component({
   selector: 'app-main-page',

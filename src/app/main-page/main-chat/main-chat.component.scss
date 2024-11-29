@@ -1,17 +1,16 @@
 @import "mixins", "styles";
 
 :host {
-    display: flex; 
-    flex-direction: column; 
-    flex: 1; 
-    height: 100%; 
+  @include display-flex($fd: column, $jc: flex-start);
+  @include size($height: 100%);
+  flex: 1;
 }
 
-.main-chat-container{
-    background-color: white;
-    flex: 1;
-    border-radius: 30px;
-    @include display-flex($fd: column, $jc: flex-start);
-    margin-left: 16px;
-    margin-right: 16px;
+.main-chat-container {
+  @include display-flex($fd: column, $jc: flex-start);
+  @include size(100%, 100%);
+  min-width: 300px;
+  max-width: 100%;
+  border-radius: 30px;
+  background-color: $primary-color-white;
 }

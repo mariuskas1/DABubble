@@ -20,13 +20,21 @@
         placeholder="Name und Nachname"
         [(ngModel)]="fullName"
         name="fullName"
+        #fullNameInput="ngModel"
         required
+        pattern="[a-zA-ZÀ-ž\s\-]+"
       />
       <img
         class="auth-input-icon"
         src="./../../assets/img/user_icon.png"
         alt="user_icon"
       />
+      <span
+        class="invalid-input"
+        [class.is-invalid]="fullNameInput.invalid && fullNameInput.touched && fullNameInput.value != ''"
+      >
+        Dieser Name ist leider ungültig.
+      </span>
     </div>
 
     <div class="auth-input-container">
@@ -36,13 +44,21 @@
         placeholder="beispielname@email.com"
         [(ngModel)]="email"
         name="email"
+        #emailInput="ngModel"
         required
+        email
       />
       <img
         class="auth-input-icon"
         src="./../../assets/img/mail_icon.png"
         alt="password_icon"
       />
+      <span
+        class="invalid-input"
+        [class.is-invalid]="emailInput.invalid && emailInput.touched && emailInput.value != ''"
+      >
+        Diese E-Mail-Adresse ist leider ungültig.
+      </span>
     </div>
 
     <div class="auth-input-container">
@@ -52,13 +68,23 @@
         placeholder="Passwort"
         [(ngModel)]="password"
         name="password"
+        #passwordInput="ngModel"
         required
+        minlength="8"
+        [attr.type]="isPasswordVisible ? 'text' : 'password'"
       />
-      <img
-        class="auth-input-icon"
-        src="./../../assets/img/password_icon.png"
-        alt="password_icon"
-      />
+      <div class="auth-input-icon-container" (click)="togglePasswordInputType()">
+        <img
+          class="auth-input-icon-hover"
+          src="./../../assets/img/password_icon.png"
+          alt="password_icon"
+        />
+      </div>
+      <span
+        class="invalid-input"
+        [class.is-invalid]="passwordInput.touched && passwordInput.invalid && password && password.length < 8">
+        Das Passwort muss mindestens 8 Zeichen lang sein.
+      </span>
     </div>
 
     <section class="auth-checkbox-container">
@@ -90,7 +116,7 @@
   <section class="auth-buttons align-items-flex-end">
     <div class="auth-button-container">
       <button
-        [disabled]="!isCheckboxChecked"
+        [disabled]="!registrationForm.valid || !isCheckboxChecked || passwordInput.value.length < 8"
         name="checkbox"
         type="submit"
         class="primary-button"
