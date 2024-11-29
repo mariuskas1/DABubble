@@ -1,15 +1,39 @@
 <header class="header">
-    <section class="header-left">
-      <img
-        class="logo"
-        src="../../assets/img/da_bubble_logo.png"
-        alt="da_bubble_logo"
-        routerLink="/login"
+  <section class="header-left" routerLink="/login">
+    <img
+      class="logo"
+      src="../../assets/img/da_bubble_logo.png"
+      alt="da_bubble_logo"
+    />
+    <span>DABubble</span>
+  </section>
+
+  <section *ngIf="showSearchBar" class="search-bar">
+    <div class="search-bar-input-container">
+      <input
+        class="search-bar-input"
+        placeholder="Devspace durchsuchen"
+        type="text"
       />
-      <span>DABubble</span>
-    </section>
-    <section class="header-right">
-      <span>Neu bei DABubble ?</span>
-      <a class="primary-href" routerLink="/registration">Konto erstellen</a>
-    </section>
+      <div class="search-bar-input-icon-container">
+        <img
+          class="search-bar-input-icon-hover"
+          src="./../../assets/img/search_icon.png"
+          alt="search_icon"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="showUserProfile" class="user-profile">
+    <img
+      src="./../../../assets/img/placeholder_header.png"
+      alt="placeholder_header"
+    />
+  </section>
+
+  <section *ngIf="showRegistrationLink" class="header-right">
+    <span>Neu bei DABubble ?</span>
+    <a class="primary-href" routerLink="/registration">Konto erstellen</a>
+  </section>
 </header>

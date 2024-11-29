@@ -24,7 +24,7 @@
 }
 
 .auth-checkbox-error {
-  @include font-style($font_size_14, $font_weight_400, $error-color-green);
+  @include font-style($font_size_14, $font_weight_400, $error-color-red);
 }
 
 .auth-checkbox-label {

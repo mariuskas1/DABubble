@@ -14,9 +14,9 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 export class AddChannelDialogComponent {
   @Output() dialogStateChange = new EventEmitter<boolean>();
 
-  dialogOpened = false;
-  mainDialogOpened = true;
-  addPeopleDialogOpened = false;
+  dialogOpened: boolean = false;
+  mainDialogOpened: boolean = true;
+  addPeopleDialogOpened: boolean = false;
   channel = new Channel();
   firestore: Firestore = inject(Firestore);
 

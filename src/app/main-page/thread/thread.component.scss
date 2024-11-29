@@ -9,7 +9,7 @@
 .thread-container{
     background-color: white;
     flex: 1;
-    width: 485px;
+    width: 500px;
     border-radius: 30px;
     @include display-flex($fd: column, $jc: flex-start);
 }

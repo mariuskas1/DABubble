@@ -61,7 +61,6 @@
 }
 
 @mixin input-style($pad: 20px, $bg: null) {
-  color: $text-color-black;
   padding: $pad;
   border: 1px solid transparent;
   border-radius: 30px;

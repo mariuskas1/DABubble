@@ -16,7 +16,7 @@
 
 .workspace-container{
     background-color: white;
-    width: 366px;
+    width: 360px;
     flex: 1;
     border-radius: 30px;
     @include display-flex($fd: column, $jc: flex-start);

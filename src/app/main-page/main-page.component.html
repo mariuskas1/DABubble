@@ -1,20 +1,18 @@
-
-
 <div class="main-page-bg">
-    <div class="main-page-container">
-        <app-header class="width-100"></app-header>
-        <div class="main-content-div">
-            <app-workspace (dialogStateChange)="handleDialogStateChange($event)"></app-workspace>
-            <app-main-chat></app-main-chat>
-            <app-thread></app-thread>
-        </div>
-        
+  <div class="main-page-container">
+    <app-header class="width-100 pad-16"></app-header>
+    <div class="main-content-div">
+      <app-workspace
+        (dialogStateChange)="handleDialogStateChange($event)"
+      ></app-workspace>
+      <app-main-chat></app-main-chat>
+      <app-thread></app-thread>
     </div>
+  </div>
 
-    
-    @if(addChannelDialogOpened){
-        <app-add-channel-dialog (dialogStateChange)="handleDialogStateChange($event)"></app-add-channel-dialog>
-    }
+  @if(addChannelDialogOpened){
+  <app-add-channel-dialog
+    (dialogStateChange)="handleDialogStateChange($event)"
+  ></app-add-channel-dialog>
+  }
 </div>
-
-
