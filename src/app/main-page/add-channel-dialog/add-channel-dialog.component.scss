@@ -71,8 +71,13 @@
             border-color: $highlight-color-purple; 
             outline: none; 
         }
+
     }
 }
+
+input.error::placeholder {
+    color: rgba(255, 0, 0, 0.8); 
+  }
 
 #names-input{
     height: 55px !important;

@@ -3,6 +3,7 @@ import { channelData } from "../types/types";
 export class Channel {
     id: string;
     name: string;
+    creator: string;
     userIds: string[];
     description: string;
     messageIds: string[];
@@ -11,6 +12,7 @@ export class Channel {
     constructor(data?: channelData) {
       this.id = data?.id ?? '';
       this.userIds = data?.userIds ?? [];
+      this.creator = data?.creator ?? '';
       this.name = data?.name ?? '';
       this.description = data?.description ?? '';
       this.messageIds = data?.messageIds ?? [];

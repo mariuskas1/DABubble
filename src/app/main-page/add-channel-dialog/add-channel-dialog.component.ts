@@ -1,8 +1,9 @@
 import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { Channel } from './../../models/channel.class';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { channelData } from '../../types/types';
 
 @Component({
   selector: 'app-add-channel-dialog',
@@ -18,6 +19,7 @@ export class AddChannelDialogComponent {
   mainDialogOpened: boolean = true;
   addPeopleDialogOpened: boolean = false;
   channel = new Channel();
+
   firestore: Firestore = inject(Firestore);
 
   channelMemberNames?: string[];
@@ -32,10 +34,23 @@ export class AddChannelDialogComponent {
       event.stopPropagation();
     }
 
+    getErrorMessage(errors:any): string{
+      if(errors.required){
+        return 'Bitte einen Namen eingeben.';
+      }
 
-    displayAddPeopleDialog(){
-      this.mainDialogOpened = false;
-      this.addPeopleDialogOpened = true;
+      if (errors.minlength) {
+        return `Der Name muss mindestens ${errors.minlength.requiredLength} Buchstaben lang sein.`;
+      }
+
+      return '';
+    }
+
+    displayAddPeopleDialog(ngForm: NgForm){
+      if(ngForm.submitted && ngForm.form.valid){
+        this.mainDialogOpened = false;
+        this.addPeopleDialogOpened = true;
+      }
     }
 
     async createNewChannel(){
@@ -49,7 +64,6 @@ export class AddChannelDialogComponent {
       } catch (error) {
         console.error(error);
       }
-
 
     }
 
