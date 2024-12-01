@@ -14,20 +14,27 @@
                 <span class="dialog-description">Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein 
                     #marketing zum Beispiel.
                 </span>
-                <div class="input-div">
-                    <label for="channel-name">Channel-Name</label>
-                    <input type="text" id="channel-name" placeholder="z.B. Kooperationsprojekte" [(ngModel)]="channel.name">
-                    <img src="./../../../assets/img/tag2.png" class="placeholder-image">
-                </div>
-                <div class="input-div">
-                    <label for="channel-name">Beschreibung</label>
-                    <input type="text" id="channel-name" placeholder="Dein Text hier" [(ngModel)]="channel.description">
-                </div>    
+                <form (ngSubmit)="displayAddPeopleDialog(addChannelForm)" #addChannelForm="ngForm">
+                    <div class="input-div">
+                        <label for="channel-name">Channel-Name</label>
+                        <input type="text" name="channelName" id="channel-name" #channelName="ngModel" spellcheck="false"
+                        [placeholder]="channelName.invalid && (channelName.touched || addChannelForm.submitted) ? getErrorMessage(channelName.errors) : 'z.B. Kooperationsprojekte'" 
+                        [class.error]="channelName?.invalid && (channelName?.touched || addChannelForm.submitted)"
+                        [(ngModel)]="channel.name" required minlength="4">
+                        <img src="./../../../assets/img/tag2.png" class="placeholder-image">
+                    </div>
+                    <div class="input-div">
+                        <label for="channel-name">Beschreibung</label>
+                        <input type="text" name="channelDescription" id="channel-name" placeholder="Dein Text hier" [(ngModel)]="channel.description" spellcheck="false">
+                    </div>    
+                
+    
+                    <div class="dialog-footer">
+                        <button (click)="stopPropagation($event)" type="submit">Erstellen</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="dialog-footer">
-                <button (click)="displayAddPeopleDialog(); stopPropagation($event)">Erstellen</button>
-            </div>
+             
         </div>
        } @else if(addPeopleDialogOpened){
         <div class="secondary-dialog" (click)="stopPropagation($event)">

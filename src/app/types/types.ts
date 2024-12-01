@@ -12,6 +12,7 @@ export type userData = {
 export type channelData = {
     id?: string;
     name: string;
+    creator: string;
     userIds: string[];
     description?: string;
     messageIds?: string[];
