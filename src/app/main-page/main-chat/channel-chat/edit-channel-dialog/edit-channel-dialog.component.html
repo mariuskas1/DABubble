@@ -15,41 +15,79 @@
          </div>
  
          <div class="dialog-content">
-             <div class="input-div" [ngClass]="{ 'active-input-div': editingChannelName }">
-                <div class="input-div-header">
-                    <span class="input-label">Channel-Name</span> 
-                    <button class="edit-btn" (click)="editChannelName()" [ngClass]="{ 'active-btn': editingChannelName }">@if(editingChannelName){Speichern} @else {Bearbeiten}</button>
+            <form #editChannelForm="ngForm" (ngSubmit)="saveChanges(editChannelForm)">
+                <div class="input-div" [ngClass]="{ 'active-input-div': editingChannelName }">
+                  <div class="input-div-header">
+                    <span class="input-label">Channel-Name</span>
+                    <button 
+                        class="edit-btn" 
+                        (click)="onEditButtonClick($event, 'name')"
+                        [ngClass]="{ 'active-btn': editingChannelName }" 
+                        [type]="editingChannelName ? 'submit' : 'button'" >
+                        {{ editingChannelName ? 'Speichern' : 'Bearbeiten' }}
+                    </button>
+                  </div>
+                  
+                  <input 
+                    type="text" 
+                    id="channel-name" 
+                    name="channelName"
+                    [(ngModel)]="channelData.name" 
+                    #channelName="ngModel"
+                    spellcheck="false" 
+                    [placeholder]="channelName.invalid && (channelName.touched || editChannelForm.submitted) ? getErrorMessage(channelName.errors) : 'z.B. Kooperationsprojekte'"
+                    
+                    [class.error]="channelName?.invalid && (channelName?.touched || editChannelForm.submitted)"
+                    [disabled]="!editingChannelName"
+                    [ngClass]="editingChannelName ? 'active-input' : 'inactive-input'"
+                    required 
+                    minlength="4">
+                  <img src="./../../../assets/img/tag2.png" class="placeholder-image">
                 </div>
-                 <input type="text" id="channel-name"  [(ngModel)]="channelData.name"
-                    [disabled]="!editingChannelName" [ngClass]="editingChannelName ? 'active-input' : 'inactive-input'">
-                 <img src="./../../../assets/img/tag2.png" class="placeholder-image">
-             </div>
-             <div class="input-div" [ngClass]="{ 'active-input-div': editingChannelDescription }">
-                <div class="input-div-header">
-                    <span class="input-label">Beschreibung</span> 
-                    <button class="edit-btn" (click)="editChannelDescription()" [ngClass]="{ 'active-btn': editingChannelDescription }">@if(editingChannelDescription){Speichern} @else {Bearbeiten}</button>
+            
+              
+                <div class="input-div" [ngClass]="{ 'active-input-div': editingChannelDescription }">
+                  <div class="input-div-header">
+                    <span class="input-label">Beschreibung</span>
+                    <button 
+                        class="edit-btn" 
+                        (click)="editChannelDescription(editChannelForm)" 
+                        [ngClass]="{ 'active-btn': editingChannelDescription }" 
+                        [type]="editingChannelDescription ? 'submit' : 'button'">
+                        {{ editingChannelDescription ? 'Speichern' : 'Bearbeiten' }}
+                    </button>
+                  </div>
+                  <input 
+                    type="text" 
+                    id="channel-description" 
+                    name="channelDescription"
+                    [(ngModel)]="channelData.description" 
+                    spellcheck="false" 
+                    [disabled]="!editingChannelDescription"
+                    [ngClass]="editingChannelDescription ? 'active-input' : 'inactive-input'" 
+                    placeholder="Dein Text hier">
+                
+                    <div class="seperator"></div>
+
+                    <div class="creator-div">
+                       <span class="input-label">Erstellt von</span>
+                       <span class="creator-span">Noah Braun</span>
+                    </div>
+                
                 </div>
-                 <input type="text" id="channel-description" [(ngModel)]="channelData.description"
-                   [disabled]="!editingChannelDescription" [ngClass]="editingChannelDescription ? 'active-input' : 'inactive-input'">
-
-                 <div class="seperator"></div>
-
-                 <div class="creator-div">
-                    <span class="input-label">Erstellt von</span>
-                    <span class="creator-span">Noah Braun</span>
-                 </div>
+            
                  
 
-             </div>    
+            </form>
+
+                
          </div>
 
          <div class="dialog-footer">
-             <button (click)="editChannel(); stopPropagation($event)">Channel verlassen</button>
+             <button (click)="leaveChannel(); stopPropagation($event)">Channel verlassen</button>
          </div>
      </div>
     
-                
-
 </div>
     
      
