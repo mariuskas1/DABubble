@@ -15,7 +15,7 @@ import { User } from './../../../../models/user.class';
 export class AddMembersDialogComponent {
   @Input() channelData!: Channel;
   @Input() allUsers!: User[];
-  @Input() position!: { top: string; right: string };
+  @Input() addMembersDialogPosition!: { top: string; left: string };
   @Output() dialogClosed = new EventEmitter<void>();
 
   firestore: Firestore = inject(Firestore);

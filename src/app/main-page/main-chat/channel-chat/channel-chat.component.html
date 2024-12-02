@@ -23,24 +23,31 @@
         </div>
 
     </div>
+
+  
+
 </div>
 
 
+
 @if(editChannelDialogOpened && activeChannelData){
-    <app-edit-channel-dialog 
-        [channelData]="activeChannelData" 
-        (dialogClosed)="closeEditDialog()" 
-        [position]="dialogPosition">
+    <app-edit-channel-dialog
+        [channelData]="activeChannelData!"
+        (dialogClosed)="closeEditDialog()"
+        [position]="editChannelDialogPosition"
+        >
     </app-edit-channel-dialog>
 }
+
+
 
 @if(showMembersDialogOpened && activeChannelData){
     <app-show-members-dialog
         [channelData]="activeChannelData" 
         (dialogClosed)="closeShowMembersDialog()" 
-        [position]="showMembersDialogPosition"
         [allUsers]="users"
         (openAddMembersDialog)="openAddMembersDialog()"
+        [showMembersDialogPosition]="showMembersDialogPosition"
         >
     </app-show-members-dialog>
 }
@@ -50,8 +57,8 @@
         [channelData]="activeChannelData" 
         [allUsers]="users"
         (dialogClosed)="closeAddMembersDialog()" 
-        [position]="addMembersDialogPosition"
         (openAddMembersDialog)="openAddMembersDialog()"
+        [addMembersDialogPosition]="addMembersDialogPosition"
         >
     </app-add-members-dialog>
 }

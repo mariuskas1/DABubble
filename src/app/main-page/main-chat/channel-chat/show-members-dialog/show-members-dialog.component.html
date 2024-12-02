@@ -1,7 +1,6 @@
 <div class="dialog-bg" (click)="closeDialog()">
        
-        <div class="dialog" (click)="stopPropagation($event)"
-        [style.top]="position.top" [style.left]="position.right">
+        <div class="dialog" (click)="stopPropagation($event)" [style.top]="showMembersDialogPosition.top" [style.left]="showMembersDialogPosition.left">
  
         <div class="dialog-header">
          <span class="dialog-title">Mitglieder</span>

@@ -8,6 +8,7 @@ import { EditChannelDialogComponent } from './edit-channel-dialog/edit-channel-d
 import { CommonModule } from '@angular/common';
 import { ShowMembersDialogComponent } from './show-members-dialog/show-members-dialog.component';
 import { AddMembersDialogComponent } from './add-members-dialog/add-members-dialog.component';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-channel-chat',
@@ -21,13 +22,14 @@ export class ChannelChatComponent {
   @ViewChild('showMembersDiv', { static: false }) showMembersDiv!: ElementRef;
   @ViewChild('addMembersDiv', { static: false }) addMembersDiv!: ElementRef;
 
-  dialogPosition: { top: string; left: string } = { top: '0px', left: '0px' };
-  addMembersDialogPosition: { top: string; right: string } = { top: '0px', right: '0px' };
-  showMembersDialogPosition: { top: string; right: string } = { top: '0px', right: '0px' };
-
   editChannelDialogOpened = false;
   showMembersDialogOpened = false;
   addMembersDialogOpened = false;
+
+  editChannelDialogPosition = { top: '0px', left: '0px' };
+  showMembersDialogPosition = { top: '0px', left: '0px' };
+  addMembersDialogPosition = { top: '0px', left: '0px' };
+
   activeChannel: string | null = null;
   activeChannelData!: Channel | undefined;
   channels$!: Observable<Channel[]>;
@@ -54,6 +56,7 @@ export class ChannelChatComponent {
     this.getUserChannels();
     this.getAllUsers();
   }
+
 
   getUserChannels(){
     const userChannelsCollection = collection(this.firestore, 'channels' );
@@ -82,7 +85,7 @@ export class ChannelChatComponent {
 
   openEditChannelDialog() {
     const rect = this.channelTitleDiv.nativeElement.getBoundingClientRect();
-    this.dialogPosition = {
+    this.editChannelDialogPosition = {
       top: `${rect.bottom + 10}px`,
       left: `${rect.left}px`,
     };
@@ -90,22 +93,24 @@ export class ChannelChatComponent {
   }
 
   openAddMembersDialog() {
-    const rect = this.channelTitleDiv.nativeElement.getBoundingClientRect();
+    const rect = this.addMembersDiv.nativeElement.getBoundingClientRect();
     this.addMembersDialogPosition = {
       top: `${rect.bottom + 10}px`,
-      right: `${rect.right -150}px`,
+      left: `${rect.left -470}px`,
     };
     this.addMembersDialogOpened = true;
   }
 
+
   openShowMembersDialog() {
-    const rect = this.channelTitleDiv.nativeElement.getBoundingClientRect();
+    const rect = this.showMembersDiv.nativeElement.getBoundingClientRect();
     this.showMembersDialogPosition = {
       top: `${rect.bottom + 10}px`,
-      right: `${rect.right + 185}px`,
+      left: `${rect.left -280}px`,
     };
     this.showMembersDialogOpened = true;
   }
+
   
   closeEditDialog() {
     this.editChannelDialogOpened = false;
@@ -118,4 +123,7 @@ export class ChannelChatComponent {
   closeShowMembersDialog(){
     this.showMembersDialogOpened = false;
   }
+
+
+
 }
