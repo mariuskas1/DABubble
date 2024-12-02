@@ -45,7 +45,7 @@ export class ChannelChatComponent {
   constructor(private channelService: ChannelService) {}
 
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.channelService.activeChannel$.subscribe(channelId => {
       this.activeChannel = channelId;
       this.updateActiveChannelData();

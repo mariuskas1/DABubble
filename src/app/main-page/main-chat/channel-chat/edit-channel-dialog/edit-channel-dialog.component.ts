@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Channel } from './../../../../models/channel.class';
 import { Firestore, collection, collectionData, doc, updateDoc } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-channel-dialog',
@@ -27,7 +27,9 @@ export class EditChannelDialogComponent {
 
 
   closeDialog(){
-    this.dialogClosed.emit();
+    if (this.channelData.name && this.channelData.name.length >= 4){
+      this.dialogClosed.emit();
+    }
   }
 
   stopPropagation(event: MouseEvent): void {
@@ -35,32 +37,91 @@ export class EditChannelDialogComponent {
   }
 
 
-  async editChannel(){
-    const channelDocRef = doc(this.firestore, `channels/${this.channelData.id}`);
-    try {
-      await updateDoc(channelDocRef, { ...this.channelData });
-    } catch (error) {
-      console.error(error);
+  async editChannel(form: NgForm){
+    if(form.valid){
+      const channelDocRef = doc(this.firestore, `channels/${this.channelData.id}`);
+      try {
+        await updateDoc(channelDocRef, { ...this.channelData });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
-  editChannelName(){
+
+
+  saveChanges(form: NgForm) {
+    if (form.valid) {
+      this.editChannel(form);
+      this.editingChannelName = false;
+      this.editingChannelDescription = false;
+    } else {
+      this.resetInvalidFields(form);
+    }
+  }
+
+
+
+  getErrorMessage(errors:any): string{
+    if(errors.required){
+      return 'Bitte einen Namen mit mindestens 4 Zeichen eingeben.';
+    }
+    if (errors.minlength) {
+      return `Der Name muss mindestens ${errors.minlength.requiredLength} Buchstaben lang sein.`;
+    }
+    return '';
+  }
+
+
+  resetInvalidFields(form: NgForm): void {
+    const controls = form.controls;
+  
+    // Reset specific invalid fields
+    if (controls['channelName']?.invalid) {
+      this.channelData.name = ''; // Reset the name field if invalid
+    }
+  }
+
+
+  onEditButtonClick(event: Event, field: 'name' | 'description'): void {
+    if (field === 'name' && !this.editingChannelName) {
+      this.toggleEditing('name');
+      event.preventDefault(); 
+    } else if (field === 'description' && !this.editingChannelDescription) {
+      this.toggleEditing('description');
+      event.preventDefault();
+    }
+  }
+
+  toggleEditing(field: 'name' | 'description') {
+    if (field === 'name') {
+      this.editingChannelName = !this.editingChannelName;
+    } else if (field === 'description') {
+      this.editingChannelDescription = !this.editingChannelDescription;
+    }
+  }
+
+  editChannelName(form: NgForm){
     if(!this.editingChannelName){
       this.editingChannelName = true;
-    } else {
+    } else if (this.editingChannelName && form.controls['channelName']?.valid) {
       this.editingChannelName = false;
-      this.editChannel();
+      this.editChannel(form);
     }
   }
 
 
-  editChannelDescription(){
+  editChannelDescription(form: NgForm){
     if(!this.editingChannelDescription){
       this.editingChannelDescription = true;
     } else {
       this.editingChannelDescription = false;
-      this.editChannel();
+      this.editChannel(form);
     }
+  }
+
+  leaveChannel(){
+
   }
 
 

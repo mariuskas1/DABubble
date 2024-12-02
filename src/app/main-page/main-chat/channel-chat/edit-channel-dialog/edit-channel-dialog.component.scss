@@ -76,11 +76,16 @@
        
 
         &:focus {
+            border-radius: 30px;
             border-color: $highlight-color-purple; 
             outline: none; 
         }
     }
 }
+
+input.error::placeholder {
+    color: rgba(255, 0, 0, 0.8); 
+  }
 
 .input-div.active-input-div{
     border: unset;
