@@ -14,8 +14,8 @@ import { User } from '../../../../models/user.class';
 })
 export class ShowMembersDialogComponent {
   @Input() channelData!: Channel;
-  @Input() position!: { top: string; right: string };
-  @Input() secondPosition!: { top: string; right: string };
+  @Input() showMembersDialogPosition!: { top: string; left: string };
+  @Input() secondPosition!: { top: string; left: string };
   @Input() allUsers!: User[];
   @Output() dialogClosed = new EventEmitter<void>();
   @Output() openAddMembersDialog= new EventEmitter<void>();

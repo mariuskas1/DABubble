@@ -5,11 +5,14 @@ import { Channel } from './../../../../models/channel.class';
 import { Firestore, collection, collectionData, doc, updateDoc } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+
 
 @Component({
   selector: 'app-edit-channel-dialog',
   standalone: true,
-  imports: [ CommonModule, FormsModule ],
+  imports: [ CommonModule, FormsModule],
   templateUrl: './edit-channel-dialog.component.html',
   styleUrl: './edit-channel-dialog.component.scss'
 })
@@ -23,7 +26,7 @@ export class EditChannelDialogComponent {
   editingChannelName = false;
   editingChannelDescription = false;
 
-  constructor(private channelService: ChannelService) {}
+  constructor(private overlay: Overlay) {}
 
 
   closeDialog(){
@@ -76,9 +79,8 @@ export class EditChannelDialogComponent {
   resetInvalidFields(form: NgForm): void {
     const controls = form.controls;
   
-    // Reset specific invalid fields
     if (controls['channelName']?.invalid) {
-      this.channelData.name = ''; // Reset the name field if invalid
+      this.channelData.name = ''; 
     }
   }
 
