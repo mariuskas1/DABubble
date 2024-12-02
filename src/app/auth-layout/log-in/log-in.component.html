@@ -12,43 +12,67 @@
     </div>
   </div>
 
-
-  <form class="auth-form" id="login-form">
-    <header class="form-header">
-      <h3>Anmeldung</h3>
-      <span
-        >Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit
-        verwendest.</span
-      >
-    </header>
+  <form class="auth-form" id="login-form" #loginForm="ngForm">
+    <app-auth-header
+      title="Anmeldung"
+      info="Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit
+    verwendest."
+    ></app-auth-header>
 
     <main class="auth-inputs">
       <div class="auth-input-container">
         <input
           class="auth-input"
-          type="text"
+          type="email"
           placeholder="beispielname@email.com"
+          autocomplete="username"
+          [(ngModel)]="email"
+          name="email"
+          #emailInput="ngModel"
+          required
+          email
         />
         <img
           class="auth-input-icon"
           src="./../../assets/img/mail_icon.png"
-          alt="mail_icon"
+          alt="password_icon"
         />
+        <span
+          class="invalid-input"
+          [class.is-invalid]="loginFailed"
+        >
+        Die E-Mail oder das Passwort sind falsch.
+        </span>
       </div>
 
       <div class="auth-input-container">
         <input
           class="auth-input"
-          type="text"
+          type="password"
           placeholder="Passwort"
-          name="password"
+          autocomplete="current-password"
           [(ngModel)]="password"
+          name="password"
+          #passwordInput="ngModel"
+          required
+          minlength="8"
+          [type]="
+            passwordVisibilityService.isPasswordVisible ? 'text' : 'password'
+          "
         />
-        <img
-          class="auth-input-icon"
-          src="./../../assets/img/password_icon.png"
-          alt="password_icon"
-        />
+        <div class="auth-input-icon-container" (click)="togglePassword()">
+          <img
+            class="auth-input-icon-hover"
+            src="./../../assets/img/password_icon.png"
+            alt="password_icon"
+          />
+        </div>
+        <span
+          class="invalid-input"
+          [class.is-invalid]="loginFailed"
+        >
+          Die E-Mail oder das Passwort sind falsch.
+        </span>
       </div>
 
       <a class="secondary-href" href="">Passwort vergessen ?</a>
@@ -67,9 +91,10 @@
       </button>
 
       <div class="auth-button-container">
-        <button class="primary-button">Anmelden</button>
+        <button [disabled]="emailInput.value == '' || password.length < 8" (click)="signIn()" class="primary-button">Anmelden</button>
         <button class="secondary-button">Gäste-Login</button>
       </div>
     </section>
   </form>
 </section>
+<app-toast></app-toast>

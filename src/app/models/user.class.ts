@@ -1,4 +1,4 @@
-import { userData } from "../types/types";
+import { userData } from '../types/types';
 
 export class User {
   id: string;
@@ -19,5 +19,18 @@ export class User {
     this.isOnline = data.isOnline ?? false;
     this.channelIds = data.channelIds ?? [];
     this.chatIds = data.chatIds ?? [];
+  }
+
+  toPlainObject() {
+    return {
+      id: this.id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      avatar: this.avatar,
+      isOnline: this.isOnline,
+      channelIds: this.channelIds,
+      chatIds: this.chatIds,
+    };
   }
 }

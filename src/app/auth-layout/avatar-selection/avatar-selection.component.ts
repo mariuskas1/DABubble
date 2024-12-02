@@ -7,11 +7,12 @@ import { User } from '../../models/user.class';
 import { RegistrationDataService } from '../../services/registration-data.service';
 import { ToastService } from '../../services/toast.service';
 import { ToastComponent } from '../../shared-components/toast/toast.component';
+import { AuthHeaderComponent } from "../auth-header/auth-header.component";
 
 @Component({
   selector: 'app-avatar-selection',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ToastComponent],
+  imports: [CommonModule, RouterModule, FormsModule, ToastComponent, AuthHeaderComponent],
   templateUrl: './avatar-selection.component.html',
   styleUrl: './avatar-selection.component.scss',
 })
@@ -86,17 +87,20 @@ export class AvatarSelectionComponent {
         registrationData.password
       );
 
-      const userData = new User({
+      const userData: User = new User({
+        id: result.user.uid,
         firstName: registrationData.firstName,
         lastName: registrationData.lastName,
         email: registrationData.email,
-        avatar: registrationData.avatar,
+        avatar: this.selectedAvatar,
         isOnline: true,
         channelIds: [],
         chatIds: [],
       });
+
+
       this.toastService.showToast('Konto erfolgreich erstellt!');
-      await this.authService.saveUserData(result.user.uid, userData);
+      await this.authService.saveUserData(result.user.uid, userData.toPlainObject());
       this.registrationDataService.clearUserData();
 
       setTimeout(() => {
