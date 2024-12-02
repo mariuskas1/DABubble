@@ -1,0 +1,13 @@
+<header class="form-header">
+  <div class="header-title">
+    @if (showIconContainer) {
+    <div class="icon-container" (click)="navigateBack()">
+      <img src="../../../assets/img/arrow_back.png" alt="arrow_back" />
+    </div>
+    }
+    <h3>{{ title }}</h3>
+  </div>
+  @if (info) {
+  <span>{{ info }}</span>
+  }
+</header>
