@@ -25,6 +25,11 @@ export class AddMembersDialogComponent {
   channelMembers: string[] = this.channelData?.userIds;;
   newMemberId = '';
 
+  userSearchQuery: string = '';
+  foundUsers?: User[] = [];
+  displaySearchResultContainer = false;
+  selectedUsers?: User[] = [];
+
 
 
   closeDialog(){
@@ -64,6 +69,44 @@ export class AddMembersDialogComponent {
       console.error(error);
     }
   }
+
+  searchUsers(event: Event){
+    const inputElement = event.target as HTMLInputElement;
+    this.userSearchQuery = inputElement.value.toLowerCase().trim();
+
+    if(this.userSearchQuery.length >= 3){
+      this.foundUsers = this.allUsers.filter(user => 
+        (user.firstName.toLowerCase().includes(this.userSearchQuery) || 
+        user.lastName.toLowerCase().includes(this.userSearchQuery)) &&
+        !this.selectedUsers?.some(selectedUser => selectedUser.id === user.id)
+      );
+    } else {
+      this.foundUsers = [];
+    }
+
+    this.displaySearchResultContainer = this.foundUsers.length > 0;
+  }
+
+
+  addFoundUserToChannel(id: string){
+    this.channelData.userIds.push(id);
+    const selectedUser = this.allUsers.find(user => user.id === id);
+
+    if(selectedUser && !this.selectedUsers?.some(selectedUser => selectedUser.id === id)){
+      this.selectedUsers?.push(selectedUser);
+    }
+
+    this.userSearchQuery = '';
+    this.displaySearchResultContainer = false;
+    this.foundUsers = [];
+  }    
+
+
+  cancelUserAdding(id:string){
+    this.channelData.userIds = this.channelData.userIds.filter(userId => userId !== id);
+    this.selectedUsers = this.selectedUsers?.filter(user => user.id !== id);
+  }
+
 
   
 }
