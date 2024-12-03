@@ -14,7 +14,34 @@
                 <span class="channel-name">{{channelData.name}}</span>
             </div>
 
-            <input type="text" placeholder="Name eingeben" [(ngModel)]="newMemberName" spellcheck="false">
+            <div class="input-div add-members-input-div">
+                @if(selectedUsers && selectedUsers.length > 0) {
+                    <div class="chip-container">
+                        @for (user of selectedUsers; track $index) {
+                            <div class="chip-div">
+                                <img src="{{user.avatar}}" class="avatar-img-small">
+                                <span class="name-span">{{user.firstName + ' ' + user.lastName}}</span>
+                                <img src="./../../../assets/img/close.png" class="cancel-user-adding-icon" (click)="cancelUserAdding(user.id)">
+                            </div>
+                        }
+                    </div>
+                }
+
+
+                <input type="text" id="names-input" placeholder="Namen eingeben" (input)="searchUsers($event)" [(ngModel)]="userSearchQuery" autocomplete="off">
+               
+                @if(displaySearchResultContainer){
+                    <div class="search-result-container">
+                        @for (user of foundUsers; track $index) {
+                            <div class="member-div" (click)="addFoundUserToChannel(user.id)">
+                                <img src="{{user.avatar}}" class="avatar-img">
+                                <span class="name-span">{{user.firstName + ' ' + user.lastName}}</span>
+                            </div>
+                        }
+                    </div>
+                }
+            
+            </div> 
 
             <div class="button-div">
                 <button [disabled] ="!newMemberName.trim()" (click)="addMember()">Hinzufügen</button>

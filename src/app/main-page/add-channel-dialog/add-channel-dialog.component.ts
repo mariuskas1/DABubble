@@ -22,7 +22,6 @@ export class AddChannelDialogComponent {
   mainDialogOpened: boolean = true;
   addPeopleDialogOpened: boolean = false;
   channel = new Channel();
-  channelMemberNames?: string[];
   selectedOption: string = 'option1';
   activeChannel: string | null = null;
   activeChannelData!: Channel | null;
@@ -30,6 +29,11 @@ export class AddChannelDialogComponent {
   allUsers$!: Observable<User[]>;
   allUserChannels: Channel[] = [];
   users: User[] = [];
+
+  userSearchQuery: string = '';
+  foundUsers?: User[] = [];
+  displaySearchResultContainer = false;
+  selectedUsers?: User[] = [];
   
 
   firestore: Firestore = inject(Firestore);
@@ -127,5 +131,41 @@ export class AddChannelDialogComponent {
     }
 
 
+    searchUsers(event: Event){
+      const inputElement = event.target as HTMLInputElement;
+      this.userSearchQuery = inputElement.value.toLowerCase().trim();
+
+      if(this.userSearchQuery.length >= 3){
+        this.foundUsers = this.users.filter(user => 
+          (user.firstName.toLowerCase().includes(this.userSearchQuery) || 
+          user.lastName.toLowerCase().includes(this.userSearchQuery)) &&
+          !this.selectedUsers?.some(selectedUser => selectedUser.id === user.id)
+        );
+      } else {
+        this.foundUsers = [];
+      }
+
+      this.displaySearchResultContainer = this.foundUsers.length > 0;
+    }
+
+
+    addFoundUserToChannel(id: string){
+      this.channel.userIds.push(id);
+      const selectedUser = this.users.find(user => user.id === id);
+
+      if(selectedUser && !this.selectedUsers?.some(selectedUser => selectedUser.id === id)){
+        this.selectedUsers?.push(selectedUser);
+      }
+
+      this.userSearchQuery = '';
+      this.displaySearchResultContainer = false;
+      this.foundUsers = [];
+    }    
+
+
+    cancelUserAdding(id:string){
+      this.channel.userIds = this.channel.userIds.filter(userId => userId !== id);
+      this.selectedUsers = this.selectedUsers?.filter(user => user.id !== id);
+    }
 
 }

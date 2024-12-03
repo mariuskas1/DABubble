@@ -1,14 +1,14 @@
 <div class="dialog-bg" (click)="closeDialog()">
        
-        <div class="dialog" (click)="stopPropagation($event)" [style.top]="showMembersDialogPosition.top" [style.left]="showMembersDialogPosition.left">
+    <div class="dialog" (click)="stopPropagation($event)" [style.top]="showMembersDialogPosition.top" [style.left]="showMembersDialogPosition.left">
  
         <div class="dialog-header">
-         <span class="dialog-title">Mitglieder</span>
-         <div class="icon-container" (click)="closeDialog()">
-             <img src="./../../../assets/img/close.png">
-         </div>
-     </div>
- 
+            <span class="dialog-title">Mitglieder</span>
+            <div class="icon-container" (click)="closeDialog()">
+                <img src="./../../../assets/img/close.png">
+            </div>
+        </div>
+    
      <div class="dialog-content">
          <div class="member-div">
              <img src="./../../../../../assets/img/Avatar 1.png">
@@ -22,9 +22,9 @@
              <img src="./../../../../../assets/img/Avatar 3.png">
              <span class="name-span">Noah Braun</span>
          </div>
- 
+    
      </div>
- 
+    
      <div class="dialog-footer">
          <div class="add-member-div" (click)="openAddMemberDialog()">
              <div class="icon-div">
@@ -34,7 +34,9 @@
          </div>
      </div>
         
-     </div>
-    
+    </div>
     
 </div>
+
+
+

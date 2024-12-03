@@ -1,5 +1,11 @@
 @import "mixins", "styles";
 
+
+:host{
+    position: absolute;
+    top: 20px;
+}
+
 .dialog-bg{
     position: fixed;
     top: 0;

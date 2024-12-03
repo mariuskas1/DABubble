@@ -49,19 +49,45 @@
     color: $secondary-color-purple;
 }
 
-input{
-    margin-top: 16px;
-    padding: 15px 20px;
-    border-radius: 30px;
-    border: 1px solid rgba(173, 176, 217, 1);
-    width: 100%;
-    height: 55px;
-    font-size: 18px;
 
-    &:focus {
-        border-color: $highlight-color-purple; 
-        outline: none; 
+
+.input-div{
+    @include display-flex($fd: column, $ai: flex-start);
+    margin-top: 24px;
+    width: 100%;
+    position: relative;
+
+    >label{
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 16px;
     }
+
+    >input{
+        width: 100%;
+        height: 60px;
+        border: 1px solid rgba(173, 176, 217, 1);
+        border-radius: 40px;
+        padding: 18px 20px 18px 50px;
+        font-size: 18px;
+
+        &:focus {
+            border-color: $highlight-color-purple; 
+            outline: none; 
+        }
+
+    }
+}
+
+input.error::placeholder {
+    color: rgba(255, 0, 0, 0.8); 
+  }
+
+#names-input{
+    height: 55px !important;
+    padding: 15px 20px 15px 20px !important;
+    width: unset;
+    flex: 1;
 }
 
 .button-div{
@@ -90,5 +116,106 @@ input{
             background-color: rgba(104, 104, 104, 1);
             cursor: default;
         }
+    }
+}
+
+
+.add-members-input-div{
+    position: relative;
+    width: 100%;
+    @include display-flex($jc: flex-start);
+    border-radius: 40px;
+    border: 1px solid rgba(173, 176, 217, 1);
+    max-width: 550px;
+    flex-wrap: wrap;
+   
+ }
+
+
+ #names-input{
+    background-color: transparent !important;
+    border: none;
+    width: unset;
+    flex: 1;
+    padding: 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+
+    &:focus, &:active{
+        background-color: transparent !important;
+        border: none;
+        outline: none;
+    }
+ }
+
+
+ .search-result-container{
+    position: absolute;
+    top: 56px;
+    left: 24px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 24px;
+    gap: 16px;
+    background-color: white;
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+ }
+
+
+ .member-div{
+    @include display-flex($jc: flex-start);
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: all 125ms ease;
+    margin-bottom: 8px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $bg-color-gray;
+    }
+}
+
+.name-span{
+    font-size: 18px;
+    margin-left: 12px;
+}
+
+.avatar-img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.chip-container{
+    @include display-flex();
+}
+
+.chip-div{
+    @include display-flex();
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: $bg-color-gray;
+    margin-left: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    height: 48px;
+    border-radius: 30px;
+}
+
+.avatar-img-small{
+    width: 24px;
+    height: 24px;
+}
+
+.cancel-user-adding-icon{
+    height: 16px;
+    width: 16px;
+    transition: all 125ms ease;
+    margin-left: 4px;
+
+    &:hover{
+        cursor: pointer;
+        scale: 1.1;
     }
 }
