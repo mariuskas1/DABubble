@@ -43,6 +43,8 @@ export class AddMembersDialogComponent {
     const newUserIds = this.selectedUsers?.map(user => user.id) || [];
     this.channelData.userIds.push(...newUserIds);
     this.updateChannel(); 
+    this.selectedUsers = [];
+    this.closeDialog();
   }
 
 
