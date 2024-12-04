@@ -36,21 +36,21 @@ export class ChannelChatComponent {
   allUsers$!: Observable<User[]>;
   allUserChannels: Channel[] = [];
   users: User[] = [];
+  activeChannelUsers: User[] = [];
   firestore: Firestore = inject(Firestore);
 
-  avatars: string[] = [
-    './../../../../assets/img/Avatar 1.png',
-    './../../../../assets/img/Avatar.png',
-    './../../../../assets/img/Avatar 3.png'
-  ];
+ 
 
   constructor(private channelService: ChannelService) {}
 
 
   ngOnInit() {
     this.channelService.activeChannel$.subscribe(channelId => {
-      this.activeChannel = channelId;
-      this.updateActiveChannelData();
+      if(this.activeChannel !==channelId){
+        this.activeChannel = channelId;
+        this.updateActiveChannelData();
+        this.getActiveChannelUsers();
+      }
     });
 
     this.getUserChannels();
@@ -64,10 +64,16 @@ export class ChannelChatComponent {
     
     this.channels$.subscribe((changes) => {
       this.allUserChannels = Array.from(new Map(changes.map(channel => [channel.id, channel])).values());
-      this.updateActiveChannelData();
+      
+      const updatedChannel = this.allUserChannels.find(channel => channel.id === this.activeChannel);
+      if (updatedChannel) {
+        this.activeChannelData = updatedChannel;
+        this.getActiveChannelUsers();
+      }
     })
   }
 
+  
   updateActiveChannelData(){
     this.activeChannelData = this.allUserChannels.find(channel => channel.id === this.activeChannel);
   }
@@ -80,6 +86,11 @@ export class ChannelChatComponent {
     this.allUsers$.subscribe((changes) => {
       this.users = Array.from(new Map(changes.map(user => [user.id, user])).values());
     })
+  }
+
+
+  getActiveChannelUsers(){
+    this.activeChannelUsers = this.users.filter(user => this.activeChannelData?.userIds.includes(user.id));
   }
 
 
