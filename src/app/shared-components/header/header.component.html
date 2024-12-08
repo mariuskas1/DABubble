@@ -1,27 +1,27 @@
-<header [ngClass]="{'padding-top-8': showSearchBar}">
+<header>
   <section [ngClass]="{'padding-left-34': showSearchBar}" class="header-left" routerLink="/login">
     <img class="logo" src="../../assets/img/da_bubble_logo.png" alt="da_bubble_logo" />
     <span>DABubble</span>
   </section>
 
-  <div class="test">
-
-    @if(showSearchBar){
-    <div class="search-bar">
-      <input class="search-bar-input" placeholder="Devspace durchsuchen" type="text" />
-      <img src="./../../assets/img/search_icon.png" alt="search_icon" />
+  @if(showSearchBar){
+    <div class="header-center">
+      @if(showSearchBar){
+        <div class="search-bar">
+          <input class="search-bar-input" placeholder="Devspace durchsuchen" type="text" />
+          <img src="./../../assets/img/search_icon.png" alt="search_icon" />
+        </div>
+        }
+    
+        @if(showUserProfile){
+        <div class="user-profile">
+          <span>Frederick Beck</span>
+          <img class="profile-img" src="./../../assets/img/avatar_3_large.png" alt="">
+          <img class="menu-icon" src="./../../assets/img/keyboard_arrow_down.png" alt="">
+        </div>
+        }
     </div>
-    }
-
-    @if(showUserProfile){
-    <div class="user-profile">
-      <span>Frederick Beck</span>
-      <img class="profile-img" src="./../../assets/img/avatar_3_large.png" alt="">
-      <img class="menu-icon" src="./../../assets/img/keyboard_arrow_down.png" alt="">
-    </div>
-    }
-
-  </div>
+  }
 
   @if(showRegistrationLink){
   <section *ngIf="showRegistrationLink" class="header-right">

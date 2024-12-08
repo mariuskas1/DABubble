@@ -5,8 +5,9 @@ header {
  
   @include display-flex($jc: space-between);
 }
-.test {
+.header-center {
   display: flex;
+  align-items: center;
   width: 1505px;
   gap: 16px;
 }
@@ -34,8 +35,8 @@ header {
   padding-top: 8px;
 }
 .user-profile {
-  @include size(342px);
-  @include display-flex($jc: flex-end, $gap: 8px);
+  @include size(500px);
+  @include display-flex($jc: flex-end, $gap: 24px);
   @include font-style(32px, 700);
 }
 .profile-img {
