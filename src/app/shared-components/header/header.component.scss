@@ -1,14 +1,55 @@
 @import "mixins", "styles";
 
-.header {
-  @include display-flex($jc: space-between, $gap: 32px);
+header {
   @include size(100%);
-  // height: 85px;
-  background: $bg-color-gray;
+ 
+  @include display-flex($jc: space-between);
 }
-
+.test {
+  display: flex;
+  width: 1505px;
+  gap: 16px;
+}
+// .header {
+//   @include display-flex($jc: space-between, $gap: 32px);
+//   @include size(100%);
+//   // height: 85px;
+//   background: $bg-color-gray;
+// }
+.search-bar {
+  @include position(relative);
+  input {
+    width: 989px;
+    outline: none;
+    border: none;
+    border-radius: 42px;
+    padding: 17.5px 45px;
+    font-size: $font-size-24;
+  }
+  img {
+    @include position(absolute, 14px, $rig: 48px);
+  }
+}
+.padding-top-8 {
+  padding-top: 8px;
+}
+.user-profile {
+  @include size(342px);
+  @include display-flex($jc: flex-end, $gap: 8px);
+  @include font-style(32px, 700);
+}
+.profile-img {
+  @include size(70px, 70px);
+}
+.menu-icon{
+    @include size(30px, 30px);
+}
+.padding-left-34 {
+  padding-left: 34px;
+}
 .header-left {
   @include display-flex($gap: 16px);
+  // padding-left: 34px;
   transition: 225ms ease-in-out;
   &:hover {
     transform: scale(1.05);
@@ -18,7 +59,8 @@
     @include size(70px, 70px);
   }
   > span {
-    @include font-style($font-size-24, $font-weight-700, $text-color-black);
+    @include font-style($font-size-32, $font-weight-700, $text-color-black);
+    //32px
   }
 }
 
@@ -29,6 +71,6 @@
   }
 }
 
-.search-bar {
-  @include size(990px);
-}
+// .search-bar {
+//   @include size(990px);
+// }
