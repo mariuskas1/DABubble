@@ -27,6 +27,7 @@
             <div class="scroll-div">
 
               @if(searchResults.length > 0 || searchedUsers.length > 0) {
+                <!-- Messages Section -->
                 @if(searchResults.length > 0){
                   <div class="section-header">Nachrichten</div>
                   @for (result of searchResults; track $index) {
@@ -40,6 +41,7 @@
                   }
                 }
 
+                <!-- Users Section -->
                 @if(searchedUsers.length > 0){
                   <div class="section-header">Benutzer</div>
                   @for (user of searchedUsers; track $index) {

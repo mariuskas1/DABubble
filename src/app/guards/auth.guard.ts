@@ -1,5 +1,6 @@
-import { inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router, CanActivateFn, UrlTree } from '@angular/router';
+import { AuthService } from '../services/authentication.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { map, take, tap } from 'rxjs/operators';
 

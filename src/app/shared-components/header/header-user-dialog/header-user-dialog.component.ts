@@ -25,7 +25,6 @@ export class HeaderUserDialogComponent {
     this.authService.setOnlineStatus(false);
     this.channelService.clearActiveChannel();
 
-   
     setTimeout(() => {
       this.router.navigate(['/login']);
     }, 1);

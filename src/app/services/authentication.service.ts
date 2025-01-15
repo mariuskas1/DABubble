@@ -19,11 +19,10 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  query,
-  collection,
-  where,
-  getDocs,
-  deleteDoc
+  query, 
+  collection, 
+  where, 
+  getDocs 
 } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.class';
@@ -54,25 +53,8 @@ export class AuthService {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  async signOut(): Promise<void> {
-    let currentUser = this.auth.currentUser;
-
-    if (currentUser && currentUser.isAnonymous) {
-      try {
-        let userRef = doc(this.firestore, `users/${currentUser.uid}`);
-        await signOut(this.auth);
-        await deleteDoc(userRef);
-        await currentUser.delete();
-        
-      } catch (error) {
-        console.error('Fehler beim Löschen des anonymen Benutzers:', error);
-      }
-    } else {
-      console.log('Nicht-anonymer Benutzer meldet sich ab.');
-    }
-
-    await signOut(this.auth);
-    console.log('Benutzer erfolgreich abgemeldet.');
+  signOut() {
+    return signOut(this.auth);
   }
 
   signInWithGoogle() {
@@ -112,12 +94,9 @@ export class AuthService {
 
   async getUserByPendingEmail(email: string): Promise<User | null> {
     const usersCollection = collection(this.firestore, 'users');
-    const emailQuery = query(
-      usersCollection,
-      where('pendingEmail', '==', email)
-    );
+    const emailQuery = query(usersCollection, where('pendingEmail', '==', email));
     const querySnapshot = await getDocs(emailQuery);
-
+  
     if (!querySnapshot.empty) {
       const userDoc = querySnapshot.docs[0];
       const userData = userDoc.data() as userData;
@@ -146,7 +125,7 @@ export class AuthService {
         avatar: userFirestoreData?.avatar ?? '',
         isOnline: userFirestoreData?.isOnline ?? false,
         pendingEmail: userFirestoreData?.pendingEmail ?? '',
-        lastReactions: userFirestoreData?.lastReactions ?? [],
+        lastReactions: userFirestoreData?.lastReactions?? []
       };
 
       return new User(userData);
@@ -214,14 +193,12 @@ export class AuthService {
     }
   }
 
+
   async isEmailAlreadyUsed(email: string): Promise<boolean> {
     try {
       const usersCollection = collection(this.firestore, 'users');
       const emailQuery = query(usersCollection, where('email', '==', email));
-      const pendingEmailQuery = query(
-        usersCollection,
-        where('pendingEmail', '==', email)
-      );
+      const pendingEmailQuery = query(usersCollection, where('pendingEmail', '==', email));
 
       let emailSnapshot = await getDocs(emailQuery);
       if (!emailSnapshot.empty) {

@@ -1,15 +1,15 @@
 <section class="login">
   <div class="intro">
-      <div class="intro-content">
-        <div class="logo-container">
-          <img
-            class="logo"
-            src="../../assets/img/da_bubble_logo.png"
-            alt="da_bubble_logo"
-          />
-        </div>
-        <span class="intro-span">DABubble</span>
+    <div class="intro-content">
+      <div class="logo-container">
+        <img
+          class="logo"
+          src="../../assets/img/da_bubble_logo.png"
+          alt="da_bubble_logo"
+        />
       </div>
+      <span class="intro-span">DABubble</span>
+    </div>
   </div>
 
   <form class="auth-form" id="login-form" #loginForm="ngForm">
@@ -37,8 +37,11 @@
           src="./../../assets/img/mail_icon.png"
           alt="password_icon"
         />
-        <span class="invalid-input" [class.is-invalid]="loginFailed">
-          Die E-Mail oder das Passwort sind falsch.
+        <span
+          class="invalid-input"
+          [class.is-invalid]="loginFailed"
+        >
+        Die E-Mail oder das Passwort sind falsch.
         </span>
       </div>
 
@@ -64,14 +67,15 @@
             alt="password_icon"
           />
         </div>
-        <span class="invalid-input" [class.is-invalid]="loginFailed">
+        <span
+          class="invalid-input"
+          [class.is-invalid]="loginFailed"
+        >
           Die E-Mail oder das Passwort sind falsch.
         </span>
       </div>
 
-      <a routerLink="/password-reset" class="secondary-href"
-        >Passwort vergessen ?</a
-      >
+      <a routerLink="/password-reset" class="secondary-href">Passwort vergessen ?</a>
     </main>
 
     <div class="divider">
@@ -87,16 +91,8 @@
       </button>
 
       <div class="auth-button-container">
-        <button
-          [disabled]="emailInput.value == '' || password.length < 8"
-          (click)="signIn()"
-          class="primary-button"
-        >
-          Anmelden
-        </button>
-        <button (click)="loginAsGuest()" class="secondary-button">
-          Gäste-Login
-        </button>
+        <button [disabled]="emailInput.value == '' || password.length < 8" (click)="signIn()" class="primary-button">Anmelden</button>
+        <button (click)="loginAsGuest()" class="secondary-button">Gäste-Login</button>
       </div>
     </section>
   </form>
